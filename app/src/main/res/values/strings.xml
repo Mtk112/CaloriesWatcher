@@ -8,10 +8,15 @@
     <string name="selectIntensity">Select intensity:</string>
     <string name="medium">Medium</string>
     <string name="intense">Intense</string>
-    <string name="duration">Duration... Hours/minutes </string>
-    <string name="exerciseName">Exercise name...</string>
+    <string name="duration">Duration: Hours/minutes </string>
+    <string name="exerciseName">Exercise name</string>
     <string name="save">Save</string>
     <string name="loadANDconfrim">Load / Confirm</string>
-    <string name="simplePlaceholder">Write here...</string>
+    <string name="simplePlaceholder">Write here</string>
+
+    <!-- Placeholder strings For Pedometer Settings (Done by Ville, Miikka might have screwed something! -->
+    <string name="pedometer_settings_headline">Pedometer settings</string>
+    <string name="pedometer_settings_edit_weight">Weight:</string>
+    <string name="pedometer_settings_edit_step_lenght">Step length:</string>
 
 </resources>
