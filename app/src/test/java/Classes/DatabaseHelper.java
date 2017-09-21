@@ -22,12 +22,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Creating Pedometer Setting table that contains Users weight, Steps per Mile and walking Speed.
         String sql = "CREATE TABLE settings (weight FLOAT, spm INTEGER, speed INTEGER);";
         db.execSQL(sql);
+        //Creates Exercises table that contains the name, intensity level and duration of the exercise.
+        sql = "CREATE TABLE exercises (exercise TEXT,intensity INTEGER, duration FLOAT);";
+        db.execSQL(sql);
+        //Inserts Dummy Data for now.
         addDummyData(db);
 
 
     }
-    public void addDummyData(SQLiteDatabase db){
+    //Method to add Dummy data... for science!
+    private void addDummyData(SQLiteDatabase db){
         String sql = "INSERT INTO settings (weight, spm, speed) VALUES (\"80.5\",\"2000\",\"4\")";
+        db.execSQL(sql);
+        sql = "INSERT INTO exercises (exercise, intensity, duration) VALUES (\"Competive football match\",\"3\",\"90.0\")";
         db.execSQL(sql);
 
     }

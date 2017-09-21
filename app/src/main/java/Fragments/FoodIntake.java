@@ -32,6 +32,4 @@ public class FoodIntake extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_food_intake, container, false);
     }
-
-
 }

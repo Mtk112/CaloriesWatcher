@@ -19,7 +19,7 @@ import com.example.miikka.calorieswatcher.R;
  * create an instance of this fragment.
  */
 public class Exercises extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+  /*  // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -28,7 +28,7 @@ public class Exercises extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener; */
 
     public Exercises() {
         // Required empty public constructor
@@ -43,7 +43,7 @@ public class Exercises extends Fragment {
      * @return A new instance of fragment Exercises.
      */
     // TODO: Rename and change types and number of parameters
-    public static Exercises newInstance(String param1, String param2) {
+  /*  public static Exercises newInstance(String param1, String param2) {
         Exercises fragment = new Exercises();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -60,14 +60,14 @@ public class Exercises extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_exercises, container, false);
     }
-
+/*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -102,8 +102,8 @@ public class Exercises extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+   /* public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
+    } */
 }

@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,8 +6,52 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textGiveFoodName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/food_intake_food_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:id="@+id/editTextFoodName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textGiveAmount"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/textGiveAmount"
+        android:text="@string/food_intake_food_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textGiveCalories"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+    <EditText
+        android:id="@+id/editTextFoodAmount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textGiveCalories"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/textGiveCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/food_intake_calories"
+        android:layout_below="@+id/editTextCalories"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:id="@+id/editTextCalories"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textGiveFoodName"
+        android:layout_alignParentStart="true" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextFoodName"
+        android:text="Button" />
+
+</RelativeLayout>
