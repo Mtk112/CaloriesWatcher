@@ -5,5 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pedometer_settings_headline">Pedometer settings</string>
     <string name="pedometer_settings_edit_weight">Weight:</string>
-    <string name="pedometer_settings_edit_stem_lenght">Step length:</string>
+    <string name="pedometer_settings_edit_step_lenght">Step length:</string>
 </resources>
