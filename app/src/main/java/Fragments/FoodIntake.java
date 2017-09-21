@@ -54,5 +54,10 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
         foodName=giveFoodName.getText().toString();
         calories=Double.parseDouble(giveCalories.getText().toString());
         amount=Double.parseDouble(giveAmount.getText().toString());
+        createNewFoodEvent();
+    }
+    
+    private void createNewFoodEvent(){
+        //// TODO: 9/22/2017 save the food and create eat event for calory counter 
     }
 }
