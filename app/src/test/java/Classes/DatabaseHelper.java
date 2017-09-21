@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sql = "CREATE TABLE settings (weight FLOAT, spm INTEGER, speed INTEGER);";
         db.execSQL(sql);
         //Creates Exercises table that contains the name, intensity level and duration of the exercise.
-        sql = "CREATE TABLE exercises (exercise TEXT,intensity INTEGER, duration FLOAT);";
+        sql = "CREATE TABLE exercises (exercise TEXT,intensity INTEGER, duration INTEGER, burnedCalories INTEGER, _id INTEGER PRIMARY KEY AUTOINCREMENT);";
         db.execSQL(sql);
         //Inserts Dummy Data for now.
         addDummyData(db);
@@ -32,9 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     //Method to add Dummy data... for science!
     private void addDummyData(SQLiteDatabase db){
-        String sql = "INSERT INTO settings (weight, spm, speed) VALUES (\"80.5\",\"2000\",\"4\")";
+        String sql = "INSERT INTO settings (weight, spm, speed) VALUES (\"80.5\",\"2000\",\"4\");";
         db.execSQL(sql);
-        sql = "INSERT INTO exercises (exercise, intensity, duration) VALUES (\"Competive football match\",\"3\",\"90.0\")";
+        sql = "INSERT INTO exercises (exercise, intensity, duration, burnedCalories) VALUES (\"Competive football match\",\"3\",\"90\",\"1005\");";
         db.execSQL(sql);
 
     }
