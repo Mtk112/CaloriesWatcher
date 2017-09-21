@@ -5,10 +5,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.miikka.calorieswatcher.R;
 
-public class PedometerSettings extends Fragment {
+public class PedometerSettings extends Fragment implements View.OnClickListener {
+    EditText getWeight, getStepLength;
+
+    float weight;
+    float stepLength;
 
     public PedometerSettings() {
         // Required empty public constructor
@@ -19,7 +25,25 @@ public class PedometerSettings extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pedometer_settings, container, false);
+        View v = inflater.inflate(R.layout.fragment_pedometer_settings, container, false);
+
+        getWeight = (EditText)v.findViewById(R.id.editTextWeight);
+        getStepLength = (EditText)v.findViewById(R.id.editStepLength);
+        Button button = (Button)v.findViewById(R.id.pedometerSettingsSave);
+        button.setOnClickListener(this);
+
+        return v;
+    }
+
+    @Override
+    public void onClick(View v){
+        weight = Float.parseFloat(getWeight.getText().toString());
+        stepLength = Float.parseFloat((getStepLength.getText().toString()));
+        saveSettings();
+    }
+
+    private void saveSettings(){
+        //TODO save the settings somewhere for other fragments to use
     }
 
 }
