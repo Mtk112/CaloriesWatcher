@@ -7,10 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.miikka.calorieswatcher.R;
 
-public class FoodIntake extends Fragment {
+public class FoodIntake extends Fragment implements View.OnClickListener{
+    EditText giveAmount,giveCalories,giveFoodName;
+
+    String foodName;
+    double calories;
+    double amount;
 
 
 
@@ -29,7 +37,22 @@ public class FoodIntake extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final View v = inflater.inflate(R.layout.fragment_food_intake, container, false);
+        giveAmount=(EditText)v.findViewById(R.id.editTextFoodAmount);
+        giveCalories = (EditText)v.findViewById(R.id.editTextCalories);
+        giveFoodName=(EditText)v.findViewById(R.id.editTextFoodName);
+        Button button = (Button)v.findViewById(R.id.buttonSaveFood);
+        button.setOnClickListener(this);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_intake, container, false);
+        return v;
+    }
+
+    @Override
+    public void onClick(View v){
+        foodName=giveFoodName.getText().toString();
+        calories=Double.parseDouble(giveCalories.getText().toString());
+        amount=Double.parseDouble(giveAmount.getText().toString());
     }
 }
