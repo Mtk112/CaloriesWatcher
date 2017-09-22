@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ToggleButton;
+
 
 import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.R;
@@ -21,11 +21,11 @@ import com.example.miikka.calorieswatcher.R;
 public class Exercises extends Fragment implements View.OnClickListener {
     //Variables and UI elements & Database
     DatabaseHelper dbHelper;
-    private String exerciseName,exerciseDuration = "";
+    private String exerciseName, exerciseDuration = "";
     private int intensity, duration, caloriesBurned, eid;
-    private boolean light,medium,intense = false;
-    EditText eDuration,eName;
-    Button eConfirm,iLight,iMedium,iIntense;
+    private boolean light, medium, intense = false;
+    EditText eDuration, eName;
+    Button eConfirm, iLight, iMedium, iIntense;
 
 
     public Exercises() {
@@ -36,29 +36,32 @@ public class Exercises extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflates the fragment, "register" the UI components & sets OnClickListeners
-        final View v = inflater.inflate(R.layout.fragment_exercises,container,false);
-        eDuration = (EditText)v.findViewById(R.id.exerciseDuration);
-        eName = (EditText)v.findViewById(R.id.exerciseName);
-        eConfirm = (Button)v.findViewById(R.id.exerciseConfirm);
+        final View v = inflater.inflate(R.layout.fragment_exercises, container, false);
+        eDuration = (EditText) v.findViewById(R.id.exerciseDuration);
+        eName = (EditText) v.findViewById(R.id.exerciseName);
+        eConfirm = (Button) v.findViewById(R.id.exerciseConfirm);
         eConfirm.setOnClickListener(this);
-        iLight = (ToggleButton)v.findViewById(R.id.exerciseLightButton);
+        iLight = (Button) v.findViewById(R.id.exerciseLightButton);
         iLight.setOnClickListener(this);
-        iMedium = (ToggleButton)v.findViewById(R.id.exerciseMediumButton);
+        iMedium = (Button) v.findViewById(R.id.exerciseMediumButton);
         iMedium.setOnClickListener(this);
-        iIntense = (ToggleButton)v.findViewById(R.id.exerciseIntenseButton);
+        iIntense = (Button) v.findViewById(R.id.exerciseIntenseButton);
         iIntense.setOnClickListener(this);
-
         return v;
     }
 
 
+    //Method for checking which button was pressed and executing the correct code
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case(R.id.exerciseLightButton):
+        switch (view.getId()) {
+            case (R.id.exerciseLightButton):
+                light = true;
+                iLight.setText("Selected");
 
-            }
+
         }
 
+    }
 }
 

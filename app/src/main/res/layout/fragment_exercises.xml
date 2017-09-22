@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/light"
         android:layout_below="@id/exerciseIntensityText"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp" />
 
     <ToggleButton android:id="@+id/exerciseMediumButton"
         android:layout_width="wrap_content"
@@ -42,13 +42,13 @@
         android:layout_alignBottom="@+id/exerciseLightButton"
         android:layout_centerHorizontal="true" />
 
-    <ToggleButton android:id="@+id/exerciseIntenseButton"
+    <Button android:id="@+id/exerciseIntenseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/intense"
         android:layout_alignBaseline="@+id/exerciseMediumButton"
         android:layout_alignBottom="@+id/exerciseMediumButton"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true" />
 
     <EditText android:id="@+id/exerciseDuration"
         android:layout_width="wrap_content"
