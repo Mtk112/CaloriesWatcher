@@ -1,4 +1,4 @@
-package Classes;
+package com.example.miikka.calorieswatcher;
 
 /**
  Class for creating Exercise objects.
