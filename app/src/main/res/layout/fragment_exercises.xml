@@ -5,49 +5,49 @@
     tools:context="Fragments.Exercises">
 
     <TextView
-        android:id="@+id/headline"
+        android:id="@+id/exerciseHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/newExercise"
         />
 
-    <EditText android:id="@+id/name"
+    <EditText android:id="@+id/exerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/exerciseName"
-        android:layout_below="@id/headline"
+        android:layout_below="@id/exerciseHeadline"
         android:layout_centerHorizontal="true" />
 
-    <TextView android:id="@+id/intensityText"
+    <TextView android:id="@+id/exerciseIntensityText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/selectIntensity"
-        android:layout_below="@id/name"
+        android:layout_below="@id/exerciseName"
         android:layout_alignParentStart="true"
         android:layout_marginTop="50dp"/>
 
-    <Button android:id="@+id/light"
+    <Button android:id="@+id/exerciseLightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/light"
-        android:layout_below="@id/intensityText"
+        android:layout_below="@id/exerciseIntensityText"
         android:layout_marginTop="50dp"/>
 
-    <Button android:id="@+id/medium"
+    <Button android:id="@+id/exerciseMediumButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/medium"
-        android:layout_alignBaseline="@+id/light"
-        android:layout_alignBottom="@+id/light"
+        android:layout_alignBaseline="@+id/exerciseLightButton"
+        android:layout_alignBottom="@+id/exerciseLightButton"
         android:layout_centerHorizontal="true" />
 
-    <Button android:id="@+id/intense"
+    <Button android:id="@+id/exerciseIntenseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/intense"
-        android:layout_alignBaseline="@+id/medium"
-        android:layout_alignBottom="@+id/medium"
+        android:layout_alignBaseline="@+id/exerciseMediumButton"
+        android:layout_alignBottom="@+id/exerciseMediumButton"
         android:layout_alignParentEnd="true"/>
 
     <EditText android:id="@+id/exerciseDuration"
@@ -55,10 +55,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/duration"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/light"
+        android:layout_below="@id/exerciseLightButton"
         android:layout_centerHorizontal="true" />
 
-    <Button android:id="@+id/confirm"
+    <Button android:id="@+id/exerciseConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loadANDconfrim"
