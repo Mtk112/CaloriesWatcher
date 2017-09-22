@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">CaloriesWatcher</string>
 
-    <!--Strings for Menu-->
-
+    <!--Strings for MenuFragment-->
+    <string name="menu_settings">SETTINGS</string>
+    <string name="menu_eat">EAT</string>
+    <string name="menu_exercise">EXERCISE</string>
+    <string name="menu_history">HISTORY</string>
 
 
 
