@@ -17,8 +17,8 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
     EditText giveAmount,giveCalories,giveFoodName;
 
     String foodName;
-    double calories;
-    double amount;
+    int calories;
+    int amount;
 
 
 
@@ -51,13 +51,17 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v){
-        foodName=giveFoodName.getText().toString();
-        calories=Double.parseDouble(giveCalories.getText().toString());
-        amount=Double.parseDouble(giveAmount.getText().toString());
-        createNewFoodEvent();
+        try {
+            foodName=giveFoodName.getText().toString();
+            calories=Integer.parseInt(giveCalories.getText().toString());
+            amount=Integer.parseInt(giveAmount.getText().toString());
+            createNewFoodEvent();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
     
     private void createNewFoodEvent(){
-        //// TODO: 9/22/2017 save the food and create eat event for calory counter 
+        //// TODO: 9/22/2017 save the food and create eat event for calories counter
     }
 }

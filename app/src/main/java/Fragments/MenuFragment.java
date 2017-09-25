@@ -72,11 +72,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             case(R.id.menuEatButton):
                 selected =2;
                 break;
-            case(R.id.menuSettingsButton):
-                selected=4;
-                break;
             case(R.id.menuExerciseButton):
                 selected=3;
+                break;
+            case(R.id.menuSettingsButton):
+                selected=4;
                 break;
         }
         mCallback.onNewFragmentSelected(selected);
