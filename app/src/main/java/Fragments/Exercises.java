@@ -48,6 +48,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
         iMedium.setOnClickListener(this);
         iIntense = (Button) v.findViewById(R.id.exerciseIntenseButton);
         iIntense.setOnClickListener(this);
+
         return v;
     }
 
@@ -56,6 +57,8 @@ public class Exercises extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            //the first 3 cases checks which intensity button is pressed and sets the intensity to correct level.
+            // the last case is for retrieving exercise data and/or saving it.
             case (R.id.exerciseLightButton):
                 if(!light){
                     light = true;
@@ -121,8 +124,9 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 }
                 Log.d("Test","Intensity set to: "+(Integer.toString(intensity)));
                 break;
-            //case(R.id.exerciseConfirm):
 
+            case(R.id.exerciseConfirm):
+                break;
 
 
         }
