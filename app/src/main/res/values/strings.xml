@@ -2,6 +2,7 @@
     <string name="app_name">CaloriesWatcher</string>
 
     <!--Strings for MenuFragment-->
+    <string name="menu_headline">What do you want to view?</string>
     <string name="menu_settings">SETTINGS</string>
     <string name="menu_eat">EAT</string>
     <string name="menu_exercise">EXERCISE</string>

@@ -13,8 +13,8 @@ import com.example.miikka.calorieswatcher.R;
 public class PedometerSettings extends Fragment implements View.OnClickListener {
     EditText getWeight, getStepLength;
 
-    float weight;
-    float stepLength;
+    int weight;
+    int stepLength;
 
     public PedometerSettings() {
         // Required empty public constructor
@@ -37,9 +37,13 @@ public class PedometerSettings extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v){
-        weight = Float.parseFloat(getWeight.getText().toString());
-        stepLength = Float.parseFloat((getStepLength.getText().toString()));
-        saveSettings();
+        try {
+            weight = Integer.parseInt(getWeight.getText().toString());
+            stepLength = Integer.parseInt((getStepLength.getText().toString()));
+            saveSettings();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     private void saveSettings(){
