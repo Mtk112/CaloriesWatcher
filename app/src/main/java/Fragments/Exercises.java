@@ -57,15 +57,15 @@ public class Exercises extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case (R.id.exerciseLightButton):
-                if(light = false){
+                if(!light){
                     light = true;
                     intensity = 1;
                     iLight.setText(R.string.selected);
-                    if(medium= true){
+                    if(medium){
                         iMedium.setText(R.string.medium);
                         medium = false;
                     }
-                    if(intense=true){
+                    if(intense){
                         iIntense.setText(R.string.intense);
                         intense=false;
                     }
@@ -79,15 +79,15 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 break;
 
             case(R.id.exerciseMediumButton):
-                if(medium = false){
+                if(!medium){
                     medium = true;
                     intensity = 2;
                     iMedium.setText(R.string.selected);
-                    if(light= true){
+                    if(light){
                         iLight.setText(R.string.light);
                         light = false;
                     }
-                    if(intense=true){
+                    if(intense){
                         iIntense.setText(R.string.intense);
                         intense=false;
                     }
@@ -101,15 +101,15 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 break;
 
             case(R.id.exerciseIntenseButton):
-                if(intense = false){
+                if(!intense){
                     intense = true;
                     intensity = 3;
                     iIntense.setText(R.string.selected);
-                    if(light= true){
+                    if(light){
                         iLight.setText(R.string.light);
                         light = false;
                     }
-                    if(medium=true){
+                    if(medium){
                         iMedium.setText(R.string.medium);
                         medium=false;
                     }
