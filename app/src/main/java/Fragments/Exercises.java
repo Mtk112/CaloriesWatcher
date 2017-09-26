@@ -126,7 +126,22 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 break;
 
             case(R.id.exerciseConfirm):
-                break;
+                exerciseName = eName.getText().toString();
+                exerciseDuration = eDuration.getText().toString();
+                if(exerciseName != "" && exerciseDuration =="" && intensity==0){
+                    try{
+
+                    }
+                    catch (Exception e){
+                        Log.d("Error: ", ""+e);
+                    }
+                }
+                else if(exerciseName != "" && exerciseDuration != "" && intensity !=0){
+
+                }
+                else{
+
+                }
 
 
         }

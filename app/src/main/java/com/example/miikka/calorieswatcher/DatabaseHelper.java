@@ -1,12 +1,14 @@
 package com.example.miikka.calorieswatcher;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 
 /**
  * Created by Miikka on 9/18/2017.
@@ -57,6 +59,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
+    }
+    //Method for inserting exercise to the database.
+    public void insertExercise(String exerciseName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement statement = db.compileStatement("INSERT INTO exercise (exercise) VALUES(\""+exerciseName+"\");");
+        statement.execute();
+        statement.close();
+        db.close();
+    }
+    //Method for inserting myExercise information to the database.
+    public void insertMyExercise(int intensity, int duration, int caloriesBurnt, int eid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement statement = db.compileStatement("INSERT INTO myExercise (intensity,duration,caloriesBurnt,eid) VALUES(\""+intensity+"\",\""+duration+"\"," +
+                "\""+caloriesBurnt+"\",\""+eid+"\");");
+        statement.execute();
+        statement.close();
+        db.close();
+    }
+
+    //Method for searching the Exercise id to be used in myExercise (for linking myExercise with exercise)
+    public int getEidByName(String exerciseName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT _id from exercise WHERE exerciseName = "+exerciseName+";";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        int result = cursor.getInt(0);
+        db.close();
+        return result;
     }
 }
 
