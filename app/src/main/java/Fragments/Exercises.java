@@ -13,6 +13,8 @@ import android.widget.EditText;
 import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.R;
 
+import java.util.List;
+
 /**
  Fragment for the user to input exercises they have done, outside of walking / jogging.
  For example, if the user plays competive football he can include his competitive football games into the app
@@ -38,6 +40,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflates the fragment, "register" the UI components & sets OnClickListeners
         final View v = inflater.inflate(R.layout.fragment_exercises, container, false);
+        dbHelper = new DatabaseHelper(this.getContext());
         eDuration = (EditText) v.findViewById(R.id.exerciseDuration);
         eName = (EditText) v.findViewById(R.id.exerciseName);
         eConfirm = (Button) v.findViewById(R.id.exerciseConfirm);
@@ -128,15 +131,33 @@ public class Exercises extends Fragment implements View.OnClickListener {
             case(R.id.exerciseConfirm):
                 exerciseName = eName.getText().toString();
                 exerciseDuration = eDuration.getText().toString();
-                if(exerciseName != "" && exerciseDuration =="" && intensity==0){
+                if(exerciseName.isEmpty() && exerciseDuration.isEmpty() && intensity==0){
                     try{
+                        eid = dbHelper.getEidByName(exerciseName);
+                        Log.d("EID: ",""+eid);
+                        List results = dbHelper.getData(eid);
+                        intensity = results.indexOf(0);
+                        duration = results.indexOf(1);
+                        Log.d("Intensity/duration: ",""+intensity+"/"+duration);
+                        switch(intensity){
+                            case(1):
+                                iLight.setText(R.string.selected);
+                                break;
+                            case(2):
+                                iMedium.setText(R.string.selected);
+                                break;
+                            case(3):
+                                iIntense.setText(R.string.selected);
+                                break;
+                        }
+                        eDuration.setText(duration);
 
                     }
                     catch (Exception e){
                         Log.d("Error: ", ""+e);
                     }
                 }
-                else if(exerciseName != "" && exerciseDuration != "" && intensity !=0){
+                else if(!exerciseName.isEmpty() && !exerciseDuration.isEmpty() && intensity !=0){
 
                 }
                 else{

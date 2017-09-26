@@ -10,6 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Miikka on 9/18/2017.
  */
@@ -47,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void addDummyData(SQLiteDatabase db){
         String sql = "INSERT INTO settings (weight, spm, speed) VALUES (\"80.5\",\"2000\",\"4\");";
         db.execSQL(sql);
-        sql = "INSERT INTO exercises (exercise) VALUES (\"Competive football match\");";
+        sql = "INSERT INTO exercises (exercise) VALUES (\"Gym\");";
         db.execSQL(sql);
         sql = "INSERT INTO myExercise (intensity,duration,caloriesBurnt, eid) VALUES (\"3\",\"90\",\"1050\",\"1\");";
         db.execSQL(sql);
@@ -60,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
     }
+
     //Method for inserting exercise to the database.
     public void insertExercise(String exerciseName){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -68,6 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         statement.close();
         db.close();
     }
+
     //Method for inserting myExercise information to the database.
     public void insertMyExercise(int intensity, int duration, int caloriesBurnt, int eid){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -81,12 +86,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Method for searching the Exercise id to be used in myExercise (for linking myExercise with exercise)
     public int getEidByName(String exerciseName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT _id from exercise WHERE exerciseName = "+exerciseName+";";
+        String query = "SELECT _id FROM exercise WHERE exerciseName = "+exerciseName+";";
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         int result = cursor.getInt(0);
         db.close();
         return result;
+    }
+
+    public List getData(int eid){
+        List values = new ArrayList();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT intensity,duration FROM myExercise WHERE eid = "+eid+";";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            int result = cursor.getInt(0);
+            values.add(result);
+        }
+        return values;
     }
 }
 
