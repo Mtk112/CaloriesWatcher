@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.example.miikka.calorieswatcher.DatabaseHelper;
@@ -81,7 +82,6 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     iLight.setText(R.string.light);
                     intensity = 0;
                 }
-                Log.d("Test","Intensity set to: "+(Integer.toString(intensity)));
                 break;
 
             case(R.id.exerciseMediumButton):
@@ -103,7 +103,6 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     iMedium.setText(R.string.medium);
                     intensity = 0;
                 }
-                Log.d("Test","Intensity set to: "+(Integer.toString(intensity)));
                 break;
 
             case(R.id.exerciseIntenseButton):
@@ -125,13 +124,12 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     iIntense.setText(R.string.intense);
                     intensity = 0;
                 }
-                Log.d("Test","Intensity set to: "+(Integer.toString(intensity)));
                 break;
 
             case(R.id.exerciseConfirm):
                 exerciseName = eName.getText().toString();
                 exerciseDuration = eDuration.getText().toString();
-                if(exerciseName.isEmpty() && exerciseDuration.isEmpty() && intensity==0){
+                if(!exerciseName.isEmpty() && exerciseDuration.isEmpty() && intensity==0){
                     try{
                         eid = dbHelper.getEidByName(exerciseName);
                         Log.d("EID: ",""+eid);
@@ -151,17 +149,19 @@ public class Exercises extends Fragment implements View.OnClickListener {
                                 break;
                         }
                         eDuration.setText(duration);
-
                     }
                     catch (Exception e){
                         Log.d("Error: ", ""+e);
                     }
                 }
                 else if(!exerciseName.isEmpty() && !exerciseDuration.isEmpty() && intensity !=0){
-
+                    dbHelper.insertExercise(exerciseName);
+                    eid = dbHelper.getEidByName(exerciseName);
+                    caloriesBurned = intensity*duration*10;
+                    dbHelper.insertMyExercise(intensity,duration,caloriesBurned,eid);
                 }
                 else{
-
+                    Toast.makeText(this.getContext(), "Please fill in the information required.", Toast.LENGTH_SHORT).show();
                 }
 
 
