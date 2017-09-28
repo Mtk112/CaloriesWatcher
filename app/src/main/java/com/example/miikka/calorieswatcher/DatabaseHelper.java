@@ -4,10 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
@@ -108,8 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return values;
     }
-
-    //TODO return Cursor directly and use the CursorAdapter
+    //Gets all the exercises and returns them as a list.
     public List<Exercise> getExercies(){
         List exercises = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -125,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exercises;
     }
 
-    //TODO return Cursor directly and use the CursorAdapter
+    //Gets all MyExercises and returns them as a list.
         public List<MyExercise> getMyExercies(){
         List myExercises = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
