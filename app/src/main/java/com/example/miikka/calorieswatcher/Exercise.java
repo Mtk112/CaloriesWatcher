@@ -6,53 +6,36 @@ package com.example.miikka.calorieswatcher;
 
 public class Exercise {
     private String exerciseName;
-    private int intensity,duration,burnedCalories,eid;
+    private int id;
 
-    public Exercise(String exerciseName,int intensity, int duration, int burnedCalories, int eid) {
+    //Constructors
+    public Exercise(String exerciseName) {
         this.exerciseName = exerciseName;
-        this.intensity = intensity;
-        this.duration = duration;
-        this.burnedCalories = burnedCalories;
-        this.eid = eid;
     }
-    //Getters and setters
+    public Exercise(String exerciseName,int id) {
+        this.exerciseName = exerciseName;
+        this.id = id;
+    }
+    public Exercise(){
+
+    }
+
+    //Getter and setter
     public String getExerciseName() {
+
         return exerciseName;
     }
 
     public void setExerciseName(String exerciseName) {
+
         this.exerciseName = exerciseName;
     }
 
-    public int getIntensity() {
-        return intensity;
+    public int getId() {
+        return id;
     }
 
-    public void setIntensity(int intensity) {
-        this.intensity = intensity;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public int getBurnedCalories() {
-        return burnedCalories;
-    }
-
-    public void setBurnedCalories(int burnedCalories) {
-        this.burnedCalories = burnedCalories;
-    }
-
-    public int getEid() {
-        return eid;
-    }
-
-    public void setEid(int eid) {
-        this.eid = eid;
+    public void setId(int id) {
+        this.id = id;
     }
 }

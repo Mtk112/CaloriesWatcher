@@ -102,12 +102,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int i = 0;
         while(cursor.moveToNext()){
             int result = cursor.getInt(i);
-            Log.d("GOt here:", "Value = "+result);
             values.add(result);
             i++;
         }
         db.close();
         return values;
+    }
+
+    //TODO return Cursor directly and use the CursorAdapter
+    public List<Exercise> getExercies(){
+        List exercises = new ArrayList();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT exercise,_id from exercises ORDER BY _id ASC";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            Exercise someExercise = new Exercise();
+            someExercise.setExerciseName(cursor.getString(0));
+            someExercise.setId(cursor.getInt(1));
+            exercises.add(someExercise);
+        }
+        db.close();
+        return exercises;
+    }
+
+    //TODO return Cursor directly and use the CursorAdapter
+        public List<MyExercise> getMyExercies(){
+        List myExercises = new ArrayList();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT _id,intensity,duration,caloriesBurnt,eid from myExercises ORDER BY _id ASC";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            MyExercise someExercise = new MyExercise();
+            someExercise.setId(cursor.getInt(0));
+            someExercise.setIntensity(cursor.getInt(1));
+            someExercise.setDuration(cursor.getInt(2));
+            someExercise.setCaloriesBurnt(cursor.getInt(3));
+            someExercise.setEid(cursor.getInt(4));
+            myExercises.add(someExercise);
+        }
+        db.close();
+        return myExercises;
     }
 }
 
