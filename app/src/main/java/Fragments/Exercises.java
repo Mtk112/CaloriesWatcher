@@ -133,10 +133,12 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     try{
                         eid = dbHelper.getEidByName(exerciseName);
                         Log.d("EID: ",""+eid);
-                        List results = dbHelper.getData(eid);
-                        intensity = results.indexOf(0);
-                        duration = results.indexOf(1);
+                        List<Integer> results = dbHelper.getData(eid);
+                        intensity = results.get(0);
+                        duration = results.get(1);
                         Log.d("Intensity/duration: ",""+intensity+"/"+duration);
+
+                        eDuration.setText(""+duration);
                         switch(intensity){
                             case(1):
                                 iLight.setText(R.string.selected);
@@ -148,7 +150,6 @@ public class Exercises extends Fragment implements View.OnClickListener {
                                 iIntense.setText(R.string.selected);
                                 break;
                         }
-                        eDuration.setText(duration);
                     }
                     catch (Exception e){
                         Log.d("Error: ", ""+e);
@@ -157,7 +158,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 else if(!exerciseName.isEmpty() && !exerciseDuration.isEmpty() && intensity !=0){
                     dbHelper.insertExercise(exerciseName);
                     eid = dbHelper.getEidByName(exerciseName);
-                    caloriesBurned = intensity*duration*10;
+                    caloriesBurned = intensity*duration*4;
                     dbHelper.insertMyExercise(intensity,duration,caloriesBurned,eid);
                 }
                 else{
