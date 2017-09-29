@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.miikka.calorieswatcher.Eaten;
+import com.example.miikka.calorieswatcher.Food;
 import com.example.miikka.calorieswatcher.R;
 
 public class FoodIntake extends Fragment implements View.OnClickListener{
@@ -63,5 +65,7 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
     
     private void createNewFoodEvent(){
         //// TODO: 9/22/2017 save the food and create eat event for calories counter
+        Food food = new Food(foodName,calories);
+        Eaten eaten = new Eaten(food,amount);
     }
 }
