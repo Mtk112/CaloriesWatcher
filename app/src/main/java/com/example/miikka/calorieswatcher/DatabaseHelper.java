@@ -88,6 +88,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         statement.close();
         db.close();
     }
+    //inserts food to database
+    public void insertFood(Food food){
+        String name = food.getName();
+        int calories = food.getCalories();
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement statement = db.compileStatement("INSERT INTO food (foodName,calories) VALUES(\""+name+"\",\""+calories+"\");");
+        statement.execute();
+        statement.close();
+        db.close();
+    }
+    //inserts eaten data to database
+    public void insertEaten(Eaten eaten){
+    //FINISH THIS
+    }
 
     //Method for searching the Exercise id to be used in myExercise (for linking myExercise with exercise)
     public int getEidByName(String exerciseName){
