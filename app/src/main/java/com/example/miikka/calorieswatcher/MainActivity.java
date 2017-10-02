@@ -5,9 +5,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import Fragments.Exercises;
@@ -16,7 +18,7 @@ import Fragments.Histograph;
 import Fragments.MenuFragment;
 import Fragments.PedometerSettings;
 
-public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener{
+public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener{
     MenuFragment menuFragment = new MenuFragment();
     private SensorManager sensorManager;
     private float steps=0;
@@ -24,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         this.steps=sensorEvent.values[0];
-        Toast.makeText(this,steps+"steps",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -41,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     @Override
     public void onNewFragmentSelected(int fragment){
         switch(fragment){
+            case(0):
+                transaction=getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,menuFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
             case(1):
                 transaction=getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,histograph);
                 transaction.addToBackStack(null);
@@ -69,8 +75,10 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        MenuFragment menu = new MenuFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,menu).commit();
+        final FloatingActionButton faButton = (FloatingActionButton)findViewById(R.id.fab);
+        faButton.setOnClickListener(this);
+
+        onNewFragmentSelected(0);
     }
 
     @Override
@@ -83,6 +91,10 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
             Toast.makeText(this,"Count sensor not available",Toast.LENGTH_LONG).show();
         }
 
+    }
+    @Override
+    public void onClick(View view){
+        Toast.makeText(this,steps+"steps",Toast.LENGTH_LONG).show();
     }
 
     @Override
