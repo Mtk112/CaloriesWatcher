@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.Eaten;
 import com.example.miikka.calorieswatcher.Food;
 import com.example.miikka.calorieswatcher.R;
@@ -18,6 +19,7 @@ import com.example.miikka.calorieswatcher.R;
 public class FoodIntake extends Fragment implements View.OnClickListener{
     EditText giveAmount,giveCalories,giveFoodName;
 
+    DatabaseHelper dbHelper;
     String foodName;
     int calories;
     int amount;
@@ -41,6 +43,7 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.fragment_food_intake, container, false);
+        dbHelper = new DatabaseHelper(this.getContext());
         giveAmount=(EditText)v.findViewById(R.id.editTextFoodAmount);
         giveCalories = (EditText)v.findViewById(R.id.editTextCalories);
         giveFoodName=(EditText)v.findViewById(R.id.editTextFoodName);
@@ -66,6 +69,7 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
     private void createNewFoodEvent(){
         //// TODO: 9/22/2017 save the food and create eat event for calories counter
         Food food = new Food(foodName,calories);
+        dbHelper.insertFood(food);
         Eaten eaten = new Eaten(food,amount);
     }
 }
