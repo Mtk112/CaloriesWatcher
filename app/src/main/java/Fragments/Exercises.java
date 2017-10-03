@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.R;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -27,6 +29,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
     DatabaseHelper dbHelper;
     String exerciseName, exerciseDuration = "";
     int intensity, duration, caloriesBurned, eid;
+    Timestamp time;
     boolean light, medium, intense = false;
     EditText eDuration, eName;
     Button eConfirm, iLight, iMedium, iIntense;
@@ -158,8 +161,12 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 else if(!exerciseName.isEmpty() && !exerciseDuration.isEmpty() && intensity !=0){
                     dbHelper.insertExercise(exerciseName);
                     eid = dbHelper.getEidByName(exerciseName);
+                    Calendar calendar = Calendar.getInstance();
+                    java.util.Date now = calendar.getTime();
+                    time = new java.sql.Timestamp(now.getTime());
+                    duration =Integer.parseInt(exerciseDuration);
                     caloriesBurned = intensity*duration*4;
-                    dbHelper.insertMyExercise(intensity,duration,caloriesBurned,eid);
+                    dbHelper.insertMyExercise(intensity,duration,caloriesBurned,eid,time);
                 }
                 else{
                     Toast.makeText(this.getContext(), "Please fill in the information required.", Toast.LENGTH_SHORT).show();
