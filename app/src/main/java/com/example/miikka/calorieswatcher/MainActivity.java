@@ -9,6 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -74,11 +76,25 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar=(Toolbar)findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         final FloatingActionButton faButton = (FloatingActionButton)findViewById(R.id.fab);
         faButton.setOnClickListener(this);
 
         onNewFragmentSelected(0);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                return true;
+            case R.id.action_back:
+                onNewFragmentSelected(0);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -94,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     }
     @Override
     public void onClick(View view){
-        Toast.makeText(this,steps+"steps",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,steps+"steps",Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -36,4 +36,7 @@
     <string name="food_intake_food_amount">Enter portion size</string>
     <string name="food_intake_calories">How many calories per 100g</string>
 
+    <string name="action_back">BACK</string>
+    <string name="action_settings">SETTINGS</string>
+
 </resources>
