@@ -25,10 +25,9 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/histogramFoodButton"/>
 
-    <ListView android:id="@+id/histogramList"
+    <fragment android:id="@+id/histogramExtraFragment"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-        android:layout_below="@id/histogramGraphsButton"
-    </ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@id/histogramGraphsButton"/>
 
 </RelativeLayout>

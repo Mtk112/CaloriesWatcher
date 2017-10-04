@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/exerciseName"
+        android:imeOptions="actionDone"
         android:layout_below="@id/exerciseHeadline"
         android:layout_centerHorizontal="true" />
 
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/exerciseIntensityText"
         android:layout_centerHorizontal="true">
+
         <Button android:id="@+id/exerciseLightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/intense"/>
+
     </LinearLayout>
 
     <EditText android:id="@+id/exerciseDuration"
@@ -57,6 +60,8 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="@string/duration"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
         android:layout_marginTop="50dp"
         android:layout_below="@id/exerciseIntensityButtons"
         android:layout_centerHorizontal="true" />
