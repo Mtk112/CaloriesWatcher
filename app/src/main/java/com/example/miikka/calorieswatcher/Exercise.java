@@ -12,6 +12,7 @@ public class Exercise {
     public Exercise(String exerciseName) {
         this.exerciseName = exerciseName;
     }
+
     public Exercise(String exerciseName,int id) {
         this.exerciseName = exerciseName;
         this.id = id;

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,14 +35,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sql = "CREATE TABLE exercises (id INTEGER PRIMARY KEY, exercise TEXT);";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "CREATE TABLE myExercise (id INTEGER PRIMARY KEY , intensity INTEGER, duration INTEGER,caloriesBurnt INTEGER, eid INTEGER, FOREIGN KEY(eid) REFERENCES exercise(id) );";
+        sql = "CREATE TABLE myExercise (id INTEGER PRIMARY KEY , intensity INTEGER, duration INTEGER, caloriesBurnt INTEGER, currentTime TEXT, eid INTEGER, FOREIGN KEY(eid) REFERENCES exercise(id) );";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
         //Creates Food and Eaten tables that contain data about what the user have eaten and how many calories.
         sql = "CREATE TABLE food (foodName TEXT, calories INT, id INTEGER PRIMARY KEY );";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "CREATE TABLE eaten (id INTEGER PRIMARY KEY , amount INTEGER, time TIMESTAMP, fid INTEGER, FOREIGN KEY(fid) REFERENCES food(id) );";
+        sql = "CREATE TABLE eaten (id INTEGER PRIMARY KEY , amount INTEGER, currentTime TEXT, fid INTEGER, FOREIGN KEY(fid) REFERENCES food(id) );";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
         //Inserts Dummy Data for now.
@@ -51,13 +52,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sql = "INSERT INTO exercises (id,exercise) VALUES (NULL,\"Gym\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "INSERT INTO myExercise (intensity,duration,caloriesBurnt, eid) VALUES (\"3\",\"90\",\"1050\",\"1\");";
+        sql = "INSERT INTO myExercise (intensity,duration,caloriesBurnt, eid, currentTime) VALUES (\"3\",\"90\",\"1050\",\"1\",\"2017-9-25 11:00:00\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
         sql = "INSERT INTO food (foodName, calories) VALUES (\"Hamburger\",\"500\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "INSERT  INTO eaten (amount, time, fid) VALUES (\"200\",\"2017-9-25 11:21:00\",\"1\");";
+        sql = "INSERT  INTO eaten (amount, currentTime, fid) VALUES (\"200\",\"2017-9-25 11:21:00\",\"1\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
 
@@ -80,10 +81,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Method for inserting myExercise information to the database.
-    public void insertMyExercise(int intensity, int duration, int caloriesBurnt, int eid){
+    public void insertMyExercise(int intensity, int duration, int caloriesBurnt, int eid, Timestamp time){
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement statement = db.compileStatement("INSERT INTO myExercise (intensity,duration,caloriesBurnt,eid) VALUES(\""+intensity+"\",\""+duration+"\"," +
-                "\""+caloriesBurnt+"\",\""+eid+"\");");
+        SQLiteStatement statement = db.compileStatement("INSERT INTO myExercise (intensity, duration, caloriesBurnt, currentTime, eid) VALUES(\""+intensity+"\", \""+duration+"\", " +
+                "\""+caloriesBurnt+"\", \"" + time + "\", \""+eid+"\");");
         statement.execute();
         statement.close();
         db.close();
@@ -93,20 +94,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String name = food.getName();
         int calories = food.getCalories();
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement statement = db.compileStatement("INSERT INTO food (foodName,calories) VALUES(\""+name+"\",\""+calories+"\");");
+        SQLiteStatement statement = db.compileStatement("INSERT INTO food (foodName, calories) VALUES(\""+name+"\",\""+calories+"\");");
         statement.execute();
         statement.close();
         db.close();
     }
     //inserts eaten data to database
     public void insertEaten(Eaten eaten){
-    //FINISH THIS
+        int amount = eaten.getAmount();
+        Timestamp time = eaten.getTime();
+        int fid = eaten.getFid();
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement statement = db.compileStatement("INSERT INTO eaten (amount,currentTime,fid) VALUES (\""+amount+"\",\""+time+"\",\""+fid+"\");");
+
     }
 
     //Method for searching the Exercise id to be used in myExercise (for linking myExercise with exercise)
     public int getEidByName(String exerciseName){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT id FROM exercises WHERE exercise = \""+exerciseName+"\";";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        int result = cursor.getInt(0);
+        db.close();
+        return result;
+    }
+    //Gets the FoodID by food name. Used for linking food table with eaten.
+    public int getFidByName(String foodName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT id FROM food WHERE food = \""+foodName+"\";";
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         int result = cursor.getInt(0);
@@ -149,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public List<MyExercise> getMyExercies(){
         List myExercises = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT id,intensity,duration,caloriesBurnt,eid from myExercises ORDER BY id ASC";
+        String query = "SELECT id,intensity,duration,caloriesBurnt,eid,currentTime from myExercises ORDER BY id DESC";
         Cursor cursor = db.rawQuery(query,null);
         while(cursor.moveToNext()){
             MyExercise someExercise = new MyExercise();
