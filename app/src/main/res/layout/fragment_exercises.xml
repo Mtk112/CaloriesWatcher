@@ -27,37 +27,37 @@
         android:layout_below="@id/exerciseName"
         android:layout_marginTop="50dp"/>
 
-    <Button android:id="@+id/exerciseLightButton"
+    <LinearLayout
+        android:id="@+id/exerciseIntensityButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/light"
         android:layout_below="@id/exerciseIntensityText"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toStartOf="@+id/exerciseName" />
+        android:layout_centerHorizontal="true">
+        <Button android:id="@+id/exerciseLightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/light"
+            android:layout_below="@id/exerciseIntensityText"
+            android:layout_toStartOf="@+id/exerciseName" />
 
-    <Button android:id="@+id/exerciseMediumButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/medium"
-        android:layout_alignBaseline="@+id/exerciseLightButton"
-        android:layout_alignBottom="@+id/exerciseLightButton"
-        android:layout_centerHorizontal="true" />
+        <Button android:id="@+id/exerciseMediumButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medium"
+            />
 
-    <Button android:id="@+id/exerciseIntenseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/intense"
-        android:layout_marginRight="10dp"
-        android:layout_above="@+id/exerciseDuration"
-        android:layout_toEndOf="@+id/exerciseName" />
+        <Button android:id="@+id/exerciseIntenseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/intense"/>
+    </LinearLayout>
 
     <EditText android:id="@+id/exerciseDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/duration"
         android:layout_marginTop="50dp"
-        android:layout_below="@id/exerciseLightButton"
+        android:layout_below="@id/exerciseIntensityButtons"
         android:layout_centerHorizontal="true" />
 
     <Button android:id="@+id/exerciseConfirm"
