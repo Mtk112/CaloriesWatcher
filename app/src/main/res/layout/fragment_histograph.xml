@@ -5,9 +5,30 @@
     tools:context="Fragments.Histograph">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button android:id="@+id/histogramExercisesButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="@string/histogramExercises" />
+
+    <Button android:id="@+id/histogramFoodButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/histogramFoods"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/histogramExercisesButton"/>
+
+    <Button android:id="@+id/histogramGraphsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/histogramGraphs"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/histogramFoodButton"/>
+
+    <ListView android:id="@+id/histogramList"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        android:layout_below="@id/histogramGraphsButton"
+    </ListView>
 
 </RelativeLayout>
