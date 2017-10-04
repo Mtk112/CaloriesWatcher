@@ -5,27 +5,37 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import Fragments.Exercises;
 import Fragments.FoodIntake;
 import Fragments.Histograph;
 import Fragments.MenuFragment;
 import Fragments.PedometerSettings;
-import Fragments.ShowExercises;
+
 
 public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener{
     MenuFragment menuFragment = new MenuFragment();
     private SensorManager sensorManager;
     private float steps=0;
+    private float lastSteps=0;
+    private Handler handler = new Handler();
+    DatabaseHelper dbHelper;
+    Timestamp time;
+    private int weight=80;
+    private int stepLength=100;
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -83,15 +93,38 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         final FloatingActionButton faButton = (FloatingActionButton)findViewById(R.id.fab);
         faButton.setOnClickListener(this);
-
+        dbHelper= new DatabaseHelper(this);
         onNewFragmentSelected(0);
+        handler.postDelayed(runnable,600000);
+    }
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if(lastSteps != steps){
+                float distance = (steps-lastSteps)*stepLength/100;
+                float speed = distance/1000;
+                int calories = (int)((0.0171*speed*speed*speed)-(0.1062*speed*speed)+(0.8710*speed)+1.4577)*weight;//TODO fix the calculation with proper values maybe
+                Calendar calendar = Calendar.getInstance();
+                java.util.Date now = calendar.getTime();
+                time = new java.sql.Timestamp(now.getTime());
+                dbHelper.insertMyExercise(1,60,calories,1,time);
+            }
+            lastSteps=steps;
+            handler.postDelayed(runnable,3600000);
+        }
+    };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_settings:
                 return true;
-            case R.id.action_back:
+            case R.id.action_home:
                 onNewFragmentSelected(0);
                 return true;
             default:
@@ -112,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     }
     @Override
     public void onClick(View view){
+
         Toast.makeText(this,steps+"steps",Toast.LENGTH_SHORT).show();
     }
 
