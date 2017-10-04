@@ -29,7 +29,7 @@ public class ExerciseAdapter extends ArrayAdapter{
 
         if(targetView == null){
             LayoutInflater li;
-            li = LayoutInflater.from(getContext());
+            li = LayoutInflater.from(this.getContext());
             targetView = li.inflate(R.layout.exerciseitems,null);
         }
 

@@ -39,4 +39,9 @@
     <string name="action_back">BACK</string>
     <string name="action_settings">SETTINGS</string>
 
+    <!--Strings for Histogram -->
+    <string name="histogramExercises">Exercises</string>
+    <string name="histogramFoods">Foods</string>
+    <string name="histogramGraphs">Graphs</string>
+
 </resources>

@@ -3,11 +3,14 @@ package Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -55,6 +58,9 @@ public class Exercises extends Fragment implements View.OnClickListener {
         iMedium.setOnClickListener(this);
         iIntense = (Button) v.findViewById(R.id.exerciseIntenseButton);
         iIntense.setOnClickListener(this);
+
+        eDuration.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        eName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         return v;
     }
@@ -171,10 +177,8 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 else{
                     Toast.makeText(this.getContext(), "Please fill in the information required.", Toast.LENGTH_SHORT).show();
                 }
-
-
         }
-
     }
+
 }
 

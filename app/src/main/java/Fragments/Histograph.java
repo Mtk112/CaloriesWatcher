@@ -2,14 +2,18 @@ package Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.miikka.calorieswatcher.R;
 
-public class Histograph extends Fragment {
+import static android.R.id.list;
 
+public class Histograph extends Fragment implements View.OnClickListener {
+    private Button exercises;
 
     public Histograph() {
         // Required empty public constructor
@@ -18,13 +22,32 @@ public class Histograph extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_histograph, container, false);
+        final View v = inflater.inflate(R.layout.fragment_histograph, container, false);
+        exercises = (Button) v.findViewById(R.id.histogramExercisesButton);
+        return v;
     }
 
+    //This onClick checks which button is pressed and executes the relevant code.
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case(R.id.histogramExercisesButton):
+                ShowExercises showExercises = new ShowExercises();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,showExercises).addToBackStack(null).commit();
+                Log.d("Pressed","It registered.");
+                break;
+            case(R.id.histogramFoodButton):
+                break;
+            case(R.id.histogramGraphsButton):
+                break;
+        }
+
+    }
 }
