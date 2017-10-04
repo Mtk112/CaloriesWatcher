@@ -39,9 +39,6 @@ public class Histograph extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case(R.id.histogramExercisesButton):
-                ShowExercises showExercises = new ShowExercises();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,showExercises).addToBackStack(null).commit();
-                Log.d("Pressed","It registered.");
                 break;
             case(R.id.histogramFoodButton):
                 break;

@@ -33,7 +33,7 @@
     <!--Strings for food intake-->
     <string name="food_intake_headline">Eating</string>
     <string name="food_intake_food_name">Enter food name</string>
-    <string name="food_intake_food_amount">Enter portion size</string>
+    <string name="food_intake_food_amount">Enter portion size in grams</string>
     <string name="food_intake_calories">How many calories per 100g</string>
 
     <string name="action_back">BACK</string>

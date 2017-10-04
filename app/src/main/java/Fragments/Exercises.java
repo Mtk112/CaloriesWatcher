@@ -159,6 +159,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
                                 iIntense.setText(R.string.selected);
                                 break;
                         }
+                        Toast.makeText(this.getContext(), "Exercise loaded, edit information if you need to before saving!", Toast.LENGTH_SHORT).show();
                     }
                     catch (Exception e){
                         Log.d("Error: ", ""+e);
@@ -173,6 +174,7 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     duration =Integer.parseInt(exerciseDuration);
                     caloriesBurned = intensity*duration*4;
                     dbHelper.insertMyExercise(intensity,duration,caloriesBurned,eid,time);
+                    Toast.makeText(this.getContext(), "Exercise saved!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Toast.makeText(this.getContext(), "Please fill in the information required.", Toast.LENGTH_SHORT).show();
