@@ -13,11 +13,14 @@ import java.util.List;
  * Created by Miikka on 9/25/2017.
  */
 
-public class ExerciseAdapter extends ArrayAdapter{
-    private List<Exercise> exers;
+public class MyExerciseAdapter extends ArrayAdapter{
+    private List<MyExercise> exers;
     private DatabaseHelper dbHelper;
+    private String name, time;
+    private int caloriesBurned;
 
-    public ExerciseAdapter(Context context, int resource, List<Exercise> exers, DatabaseHelper db) {
+
+    public MyExerciseAdapter(Context context, int resource, List<MyExercise> exers, DatabaseHelper db) {
         super(context, resource, exers);
         this.dbHelper = db;
         this.exers = exers;
@@ -33,11 +36,14 @@ public class ExerciseAdapter extends ArrayAdapter{
             targetView = li.inflate(R.layout.exerciseitems,null);
         }
 
-        Exercise exe = exers.get(position);
+        MyExercise exe = exers.get(position);
         if (exers != null) {
-            TextView tvName = (TextView) targetView.findViewById(R.id.name);
-            tvName.setText(exe.getExerciseName());
-
+            TextView tvInfo = (TextView) targetView.findViewById(R.id.info);
+            int eid = exe.getEid();
+            name = dbHelper.getNameByEid(eid);
+            caloriesBurned = exe.getCaloriesBurnt();
+            time = exe.getTime().toString();
+            tvInfo.setText(""+name+" Calories used: "+caloriesBurned+"\n "+time);
         }
         return targetView;
     }

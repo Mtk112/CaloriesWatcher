@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +114,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+    //Finds the name of exercise by exercise id(eid)
+    public String getNameByEid(int eid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT exercise FROM exercises WHERE id = "+eid+";";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        String result = cursor.getString(0);
+        db.close();
+        return result;
+    }
     //Gets the FoodID by food name. Used for linking food table with eaten.
     public int getFidByName(String foodName){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -138,28 +149,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return values;
     }
-    //Gets all the exercises and returns them as a list.
-    public List<Exercise> getExercies(){
-        List exercises = new ArrayList();
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT exercise,id from exercises ORDER BY id DESC";
-        Cursor cursor = db.rawQuery(query,null);
-        while(cursor.moveToNext()){
-            Exercise someExercise = new Exercise();
-            someExercise.setExerciseName(cursor.getString(0));
-            someExercise.setId(cursor.getInt(1));
-            exercises.add(someExercise);
-        }
-
-        db.close();
-        return exercises;
-    }
 
     //Gets all MyExercises and returns them as a list.
         public List<MyExercise> getMyExercies(){
         List myExercises = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT id,intensity,duration,caloriesBurnt,eid,cTime from myExercises ORDER BY id DESC";
+        String query = "SELECT id,intensity,duration,caloriesBurnt,eid,cTime from myExercise ORDER BY id DESC";
         Cursor cursor = db.rawQuery(query,null);
         while(cursor.moveToNext()){
             MyExercise someExercise = new MyExercise();
@@ -168,6 +163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             someExercise.setDuration(cursor.getInt(2));
             someExercise.setCaloriesBurnt(cursor.getInt(3));
             someExercise.setEid(cursor.getInt(4));
+            someExercise.setTime(Timestamp.valueOf(cursor.getString(5)));
             myExercises.add(someExercise);
         }
         db.close();

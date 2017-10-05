@@ -30,12 +30,12 @@ public class FoodAdapter extends ArrayAdapter {
         if(targetView == null){
             LayoutInflater li;
             li = LayoutInflater.from(getContext());
-            targetView = li.inflate(R.layout.fooditems,null);
+            targetView = li.inflate(R.layout.exerciseitems,null);
         }
 
         Food foodie = foods.get(position);
         if (foods != null) {
-            TextView tvName = (TextView) targetView.findViewById(R.id.name);
+            TextView tvName = (TextView) targetView.findViewById(R.id.info);
             tvName.setText(foodie.getName());
 
         }

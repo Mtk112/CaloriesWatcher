@@ -2,6 +2,8 @@ package Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import static android.R.id.list;
 
 public class Histograph extends Fragment implements View.OnClickListener {
     private Button exercises;
+    private FragmentTransaction transaction;
 
     public Histograph() {
         // Required empty public constructor
@@ -31,6 +34,8 @@ public class Histograph extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.fragment_histograph, container, false);
         exercises = (Button) v.findViewById(R.id.histogramExercisesButton);
+        exercises.setOnClickListener(this);
+
         return v;
     }
 
@@ -39,6 +44,9 @@ public class Histograph extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case(R.id.histogramExercisesButton):
+                ShowExercises se = new ShowExercises();
+                transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,se);
+                transaction.commit();
                 break;
             case(R.id.histogramFoodButton):
                 break;
