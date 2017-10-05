@@ -26,7 +26,7 @@ import Fragments.MenuFragment;
 import Fragments.PedometerSettings;
 
 
-public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener,PedometerSettings.onPedometerSettingsChanged{
     MenuFragment menuFragment = new MenuFragment();
     private SensorManager sensorManager;
     private float steps=0;
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_settings:
+                onNewFragmentSelected(4);
                 return true;
             case R.id.action_home:
                 onNewFragmentSelected(0);
@@ -156,6 +157,12 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onSettingsChanged(int weight, int stepLength) {
+        this.stepLength=stepLength;
+        this.weight=weight;
     }
 }
 

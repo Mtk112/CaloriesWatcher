@@ -17,7 +17,6 @@ import com.example.miikka.calorieswatcher.R;
 public class MenuFragment extends Fragment implements View.OnClickListener{
     Button historyButton;
     Button eatButton;
-    Button settingsButton;
     Button exerciseButton;
     int selected=0;
 
@@ -40,7 +39,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         }catch (ClassCastException e){
             throw new ClassCastException(activity.toString());
         }
-
     }
 
     @Override
@@ -51,10 +49,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         historyButton = (Button)v.findViewById(R.id.menuHistoryButton);
         eatButton=(Button)v.findViewById(R.id.menuEatButton);
-        settingsButton=(Button)v.findViewById(R.id.menuSettingsButton);
         exerciseButton=(Button)v.findViewById(R.id.menuExerciseButton);
         historyButton.setOnClickListener(this);
-        settingsButton.setOnClickListener(this);
         eatButton.setOnClickListener(this);
         exerciseButton.setOnClickListener(this);
 
@@ -74,9 +70,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case(R.id.menuExerciseButton):
                 selected=3;
-                break;
-            case(R.id.menuSettingsButton):
-                selected=4;
                 break;
         }
         mCallback.onNewFragmentSelected(selected);
