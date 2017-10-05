@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sql = "INSERT INTO food (foodName, calories) VALUES (\"Hamburger\",\"500\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "INSERT  INTO eaten (amount, cTime, fid) VALUES (\"200\",\"2017-9-25 11:21:00\",\"1\");";
+        sql = "INSERT  INTO eaten (id,amount, cTime, fid) VALUES (1,\"200\",\"2017-9-25 11:21:00\",\"1\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
 
@@ -145,6 +145,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public Food getFoodByFid(int fid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT foodName,calories,id FROM food WHERE id = "+fid+";";
+        Cursor cursor = db.rawQuery(query,null);
+        cursor.moveToFirst();
+        Food tempFood = new Food();
+        tempFood.setName(cursor.getString(0));
+        tempFood.setCalories(cursor.getInt(1));
+        tempFood.setId(cursor.getInt(2));
+        db.close();
+        return tempFood;
+    }
+
     public List getData(int eid){
         List values = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -179,6 +192,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return myExercises;
     }
+    //(id INTEGER PRIMARY KEY , amount INTEGER, cTime TEXT, fid INTEGER
+    public List<Eaten> getEaten(){
+        List eaten = new ArrayList();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT id,amount,cTime,fid FROM eaten ORDER BY id DESC";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            Eaten someFood = new Eaten();
+            someFood.setId(cursor.getInt(0));
+            someFood.setAmount(cursor.getInt(1));
+            Log.d("HEre:",""+cursor.getString(2));
+            someFood.setTime(Timestamp.valueOf(cursor.getString(2)));
+            someFood.setFid(cursor.getInt(3));
+            Log.d("HEre:",""+cursor.getInt(3));
+            Food tempFood = getFoodByFid(cursor.getInt(3));
+            someFood.setFood(tempFood);
+            eaten.add(someFood);
+        }
+        db.close();
+        return eaten;
+    }
+
     public UserSettings getUserSettings(){
         UserSettings userSettings= new UserSettings();
         int weight;

@@ -15,7 +15,7 @@ import com.example.miikka.calorieswatcher.R;
 import static android.R.id.list;
 
 public class Histograph extends Fragment implements View.OnClickListener {
-    private Button exercises;
+    private Button exercises,foods;
     private FragmentTransaction transaction;
 
     public Histograph() {
@@ -35,6 +35,8 @@ public class Histograph extends Fragment implements View.OnClickListener {
         final View v = inflater.inflate(R.layout.fragment_histograph, container, false);
         exercises = (Button) v.findViewById(R.id.histogramExercisesButton);
         exercises.setOnClickListener(this);
+        foods = (Button)v.findViewById(R.id.histogramFoodButton);
+        foods.setOnClickListener(this);
 
         return v;
     }
@@ -49,6 +51,9 @@ public class Histograph extends Fragment implements View.OnClickListener {
                 transaction.commit();
                 break;
             case(R.id.histogramFoodButton):
+                ShowFood sf = new ShowFood();
+                transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,sf);
+                transaction.commit();
                 break;
             case(R.id.histogramGraphsButton):
                 break;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.Eaten;
@@ -63,13 +64,20 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
             createNewFoodEvent();
         } catch (NumberFormatException e) {
             e.printStackTrace();
+            Toast.makeText(this.getContext(), "Please fill in every field!", Toast.LENGTH_SHORT).show();
         }
     }
-    
+    //method for inserting Food and eaten information to the database
     private void createNewFoodEvent(){
-        //// TODO: 9/22/2017 save the food and create eat event for calories counter
-        Food food = new Food(foodName,calories);
-        dbHelper.insertFood(food);
-        Eaten eaten = new Eaten(food,amount);
+        if(!foodName.isEmpty()) {
+            Food food = new Food(foodName, calories);
+            dbHelper.insertFood(food);
+            Eaten eaten = new Eaten(food, amount);
+            dbHelper.insertEaten(eaten);
+            Toast.makeText(this.getContext(), "Eating saved!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this.getContext(), "Please fill in every field!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

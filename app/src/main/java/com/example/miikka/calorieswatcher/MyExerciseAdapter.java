@@ -43,7 +43,7 @@ public class MyExerciseAdapter extends ArrayAdapter{
             name = dbHelper.getNameByEid(eid);
             caloriesBurned = exe.getCaloriesBurnt();
             time = exe.getTime().toString();
-            tvInfo.setText(""+name+" Calories used: "+caloriesBurned+"\n "+time);
+            tvInfo.setText(""+name+", Calories used: "+caloriesBurned+"\n "+time);
         }
         return targetView;
     }

@@ -12,6 +12,7 @@ public class Eaten {
     int amount;//grams
     int fid;
     Timestamp time;
+    int id;
 
     public Food getFood() {
         return food;
@@ -29,17 +30,17 @@ public class Eaten {
         this.amount = amount;
     }
 
-    public int getFid(){return fid;}
+    public int getFid(){return food.getId();}
+
+    public void setFid(int fid) {this.fid = fid;}
+
+    public void setId(int id){this.id = id;}
 
     public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(){
-        Calendar calendar = Calendar.getInstance();
-        java.util.Date now = calendar.getTime();
-        this.time = new java.sql.Timestamp(now.getTime());
-    }
+    public void setTime(Timestamp time){this.time = time;}
 
     public Eaten() {
     }
@@ -47,7 +48,6 @@ public class Eaten {
     public Eaten(Food food, int amount) {
         this.food = food;
         this.amount = amount;
-        this.setTime();
     }
 
     public Eaten(Food food, int amount,int fid, Timestamp time) {
