@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Creating Pedometer Setting table that contains Users weight, Steps per Mile and walking Speed.
-        String sql = "CREATE TABLE settings (weight FLOAT, sLength INTEGER);";
+        String sql = "CREATE TABLE settings (weight INTEGER, sLength INTEGER);";
         db.execSQL(sql);
         //Creates Exercises table that contains the name, intensity level and duration of the exercise.
         sql = "CREATE TABLE exercises (id INTEGER PRIMARY KEY, exercise TEXT);";
@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sql = "CREATE TABLE eaten (id INTEGER PRIMARY KEY , amount INTEGER, cTime TEXT, fid INTEGER, FOREIGN KEY(fid) REFERENCES food(id) );";
         db.execSQL(sql);
         //Inserts Dummy Data for now.
-        sql = "INSERT INTO settings (weight, sLength, speed) VALUES (\"80.5\",\"100\");";
+        sql = "INSERT INTO settings (weight, sLength) VALUES (\"80.5\",\"100\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
         sql = "INSERT INTO exercises (id,exercise) VALUES (1,\"Walking\");";
@@ -60,6 +60,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
+    }
+    //Method for inserting settings data to database
+    public void insertSettings(int weight,int stepLength){
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement statement = db.compileStatement("INSERT INTO settings (weight,sLength) VALUES("+weight+", "+stepLength+")");
+        statement.execute();
+        Log.d("Inserting",statement.toString());
+        statement.close();
+        db.close();
     }
 
     //Method for inserting exercise to the database.
@@ -173,6 +182,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return myExercises;
+    }
+    public UserSettings getUserSettings(){
+        UserSettings userSettings= new UserSettings();
+        int weight;
+        int stepLength;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT weight,sLength from settings";
+        Cursor cursor = db.rawQuery(query,null);
+        while (cursor.moveToNext()) {
+            userSettings.setWeight(cursor.getInt(0));
+            userSettings.setStepLength(cursor.getInt(1));
+        }
+        db.close();
+        return userSettings;
     }
 }
 
