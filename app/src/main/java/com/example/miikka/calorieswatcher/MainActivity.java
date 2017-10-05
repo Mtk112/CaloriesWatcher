@@ -26,7 +26,7 @@ import Fragments.MenuFragment;
 import Fragments.PedometerSettings;
 
 
-public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener,PedometerSettings.onPedometerSettingsChanged{
+public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener{
     MenuFragment menuFragment = new MenuFragment();
     private SensorManager sensorManager;
     private float steps=0;
@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     private Handler handler = new Handler();
     DatabaseHelper dbHelper;
     Timestamp time;
-    private int weight=80;
-    private int stepLength=100;
+//    private int weight=80;
+//    private int stepLength=100;
+    UserSettings userSettings;
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -94,12 +95,15 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         final FloatingActionButton faButton = (FloatingActionButton)findViewById(R.id.fab);
         faButton.setOnClickListener(this);
         dbHelper= new DatabaseHelper(this);
+        userSettings=dbHelper.getUserSettings();
         onNewFragmentSelected(0);
         handler.postDelayed(runnable,600000);
     }
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
+            int stepLength=userSettings.getStepLength();
+            int weight=userSettings.getWeight();
             if(lastSteps != steps){
                 float distance = (steps-lastSteps)*stepLength/100;
                 float speed = distance/1000;
@@ -159,10 +163,5 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         }
     }
 
-    @Override
-    public void onSettingsChanged(int weight, int stepLength) {
-        this.stepLength=stepLength;
-        this.weight=weight;
-    }
 }
 
