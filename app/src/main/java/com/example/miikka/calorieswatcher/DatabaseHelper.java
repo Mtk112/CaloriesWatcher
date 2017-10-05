@@ -88,6 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 " VALUES("+intensity+", "+duration+", " +
                 ""+caloriesBurnt+", \"" + time + "\", "+eid+");");
         statement.execute();
+        Log.d("Inserting",statement.toString());
         statement.close();
         db.close();
     }
