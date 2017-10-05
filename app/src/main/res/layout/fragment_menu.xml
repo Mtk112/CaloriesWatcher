@@ -37,11 +37,11 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/menuEatButton" />
 
-    <Button
-        android:id="@+id/menuSettingsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_settings"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/menuExerciseButton" />
+    <!--<Button-->
+        <!--android:id="@+id/menuSettingsButton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/menu_settings"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_below="@id/menuExerciseButton" />-->
 </RelativeLayout>
