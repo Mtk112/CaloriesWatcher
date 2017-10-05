@@ -27,35 +27,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Creating Pedometer Setting table that contains Users weight, Steps per Mile and walking Speed.
-        Log.d("Inserting this:", "GOT HERE");
-        String sql = "CREATE TABLE settings (weight FLOAT, spm INTEGER, speed INTEGER);";
-        Log.d("Inserting this:", sql);
+        String sql = "CREATE TABLE settings (weight FLOAT, sLength INTEGER);";
         db.execSQL(sql);
         //Creates Exercises table that contains the name, intensity level and duration of the exercise.
         sql = "CREATE TABLE exercises (id INTEGER PRIMARY KEY, exercise TEXT);";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         sql = "CREATE TABLE myExercise (id INTEGER PRIMARY KEY , intensity INTEGER, duration INTEGER, caloriesBurnt INTEGER, cTime TEXT," +
                 " eid INTEGER, FOREIGN KEY(eid) REFERENCES exercise(id) );";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         //Creates Food and Eaten tables that contain data about what the user have eaten and how many calories.
         sql = "CREATE TABLE food (foodName TEXT, calories INT, id INTEGER PRIMARY KEY );";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         sql = "CREATE TABLE eaten (id INTEGER PRIMARY KEY , amount INTEGER, cTime TEXT, fid INTEGER, FOREIGN KEY(fid) REFERENCES food(id) );";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         //Inserts Dummy Data for now.
-        sql = "INSERT INTO settings (weight, spm, speed) VALUES (\"80.5\",\"2000\",\"4\");";
+        sql = "INSERT INTO settings (weight, sLength, speed) VALUES (\"80.5\",\"100\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
-        sql = "INSERT INTO exercises (id,exercise) VALUES (NULL,\"Gym\");";
+        sql = "INSERT INTO exercises (id,exercise) VALUES (1,\"Walking\");";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
-        sql = "INSERT INTO myExercise (intensity,duration,caloriesBurnt, eid, cTime) VALUES (\"3\",\"90\",\"1050\",\"1\",\"2017-9-25 11:00:00\");";
-        db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         sql = "INSERT INTO food (foodName, calories) VALUES (\"Hamburger\",\"500\");";
         db.execSQL(sql);
         Log.d("Inserting this:", sql);
