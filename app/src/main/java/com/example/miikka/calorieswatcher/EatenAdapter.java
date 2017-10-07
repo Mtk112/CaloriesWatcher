@@ -40,7 +40,7 @@ public class EatenAdapter extends ArrayAdapter {
             int fid = ate.getFid();
             Food tempFood = dbHelper.getFoodByFid(fid);
             String name = tempFood.getName();
-            int caloriesPer100g = ate.getFood().getCalories();
+            int caloriesPer100g = tempFood.getCalories();
             int amount = ate.getAmount();
             int calories = amount*caloriesPer100g/100;
             Timestamp time = ate.getTime();

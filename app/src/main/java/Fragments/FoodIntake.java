@@ -17,6 +17,9 @@ import com.example.miikka.calorieswatcher.Eaten;
 import com.example.miikka.calorieswatcher.Food;
 import com.example.miikka.calorieswatcher.R;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
 public class FoodIntake extends Fragment implements View.OnClickListener{
     EditText giveAmount,giveCalories,giveFoodName;
 
@@ -72,7 +75,11 @@ public class FoodIntake extends Fragment implements View.OnClickListener{
         if(!foodName.isEmpty()) {
             Food food = new Food(foodName, calories);
             dbHelper.insertFood(food);
-            Eaten eaten = new Eaten(food, amount);
+            int fid = dbHelper.getFidByName(foodName);
+            Calendar calendar = Calendar.getInstance();
+            java.util.Date now = calendar.getTime();
+            Timestamp time = new java.sql.Timestamp(now.getTime());
+            Eaten eaten = new Eaten(amount,time,fid);
             dbHelper.insertEaten(eaten);
             Toast.makeText(this.getContext(), "Eating saved!", Toast.LENGTH_SHORT).show();
         }

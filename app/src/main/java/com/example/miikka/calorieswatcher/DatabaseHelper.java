@@ -47,11 +47,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("Inserting this:", sql);
         sql = "INSERT INTO exercises (id,exercise) VALUES (1,\"Walking\");";
         db.execSQL(sql);
-        sql = "INSERT INTO food (foodName, calories) VALUES (\"Hamburger\",\"500\");";
-        db.execSQL(sql);
-        Log.d("Inserting this:", sql);
-        sql = "INSERT  INTO eaten (id,amount, cTime, fid) VALUES (1,\"200\",\"2017-9-25 11:21:00\",\"1\");";
-        db.execSQL(sql);
         Log.d("Inserting this:", sql);
 
 
@@ -108,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Timestamp time = eaten.getTime();
         int fid = eaten.getFid();
         SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteStatement statement = db.compileStatement("INSERT INTO eaten (amount,cTime,fid) VALUES (\""+amount+"\",\""+time+"\",\""+fid+"\");");
+        SQLiteStatement statement = db.compileStatement("INSERT INTO eaten (amount,cTime,fid) VALUES ("+amount+",\""+time+"\","+fid+");");
         statement.execute();
         statement.close();
         db.close();
@@ -137,7 +132,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Gets the FoodID by food name. Used for linking food table with eaten.
     public int getFidByName(String foodName){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT id FROM food WHERE food = \""+foodName+"\";";
+        String query = "SELECT id FROM food WHERE foodName = \""+foodName+"\";";
         Cursor cursor = db.rawQuery(query,null);
         cursor.moveToFirst();
         int result = cursor.getInt(0);
@@ -202,12 +197,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Eaten someFood = new Eaten();
             someFood.setId(cursor.getInt(0));
             someFood.setAmount(cursor.getInt(1));
-            Log.d("HEre:",""+cursor.getString(2));
+            Log.d("GEtting this",""+cursor.getString(2));
             someFood.setTime(Timestamp.valueOf(cursor.getString(2)));
             someFood.setFid(cursor.getInt(3));
-            Log.d("HEre:",""+cursor.getInt(3));
-            Food tempFood = getFoodByFid(cursor.getInt(3));
-            someFood.setFood(tempFood);
             eaten.add(someFood);
         }
         db.close();
