@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -57,6 +58,12 @@ public class ShowGraph extends Fragment {
         barEntries.add(new BarEntry((float)caloriesBurnt,1));
         barEntries.add(new BarEntry((float)difference,2));
         BarDataSet barDataSet = new BarDataSet(barEntries,"Calories Gained, Calories Burnt, Difference");
+        if(difference<=0){
+            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.RED});
+        }
+        else{
+            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.GREEN}); 
+        }
 
         List<String> info = new ArrayList<>();
         info.add("Gained");
@@ -64,7 +71,6 @@ public class ShowGraph extends Fragment {
         info.add("Difference");
 
         BarData theData = new BarData(info,barDataSet);
-        //theData.setBarWidth(1f);
         bars.setData(theData);
         bars.invalidate();
         bars.setTouchEnabled(true);
