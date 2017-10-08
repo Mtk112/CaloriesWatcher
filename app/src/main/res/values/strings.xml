@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">CaloriesWatcher</string>
+    <string name="history">History</string>
+    <string name="exercise">Exercise</string>
+    <string name="eat">Eat</string>
 
     <!--Strings for MenuFragment-->
     <string name="menu_headline">What do you want to view?</string>

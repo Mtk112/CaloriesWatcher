@@ -3,6 +3,8 @@ package Fragments;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -47,6 +49,8 @@ public class Exercises extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflates the fragment, "register" the UI components & sets OnClickListeners
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(R.string.exercise);
         final View v = inflater.inflate(R.layout.fragment_exercises, container, false);
         dbHelper = new DatabaseHelper(this.getContext());
         eDuration = (EditText) v.findViewById(R.id.exerciseDuration);
