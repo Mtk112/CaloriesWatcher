@@ -1,7 +1,10 @@
 package Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -46,6 +49,8 @@ public class Exercises extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflates the fragment, "register" the UI components & sets OnClickListeners
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle(R.string.exercise);
         final View v = inflater.inflate(R.layout.fragment_exercises, container, false);
         dbHelper = new DatabaseHelper(this.getContext());
         eDuration = (EditText) v.findViewById(R.id.exerciseDuration);
@@ -76,19 +81,19 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 if(!light){
                     light = true;
                     intensity = 1;
-                    iLight.setText(R.string.selected);
+                    iLight.setTextColor(Color.RED);
                     if(medium){
-                        iMedium.setText(R.string.medium);
+                        iMedium.setTextColor(Color.WHITE);
                         medium = false;
                     }
                     if(intense){
-                        iIntense.setText(R.string.intense);
+                        iIntense.setTextColor(Color.WHITE);
                         intense=false;
                     }
                 }
                 else{
                     light = false;
-                    iLight.setText(R.string.light);
+                    iLight.setTextColor(Color.WHITE);
                     intensity = 0;
                 }
                 break;
@@ -97,19 +102,19 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 if(!medium){
                     medium = true;
                     intensity = 2;
-                    iMedium.setText(R.string.selected);
+                    iMedium.setTextColor(Color.RED);
                     if(light){
-                        iLight.setText(R.string.light);
+                        iLight.setTextColor(Color.WHITE);
                         light = false;
                     }
                     if(intense){
-                        iIntense.setText(R.string.intense);
+                        iIntense.setTextColor(Color.WHITE);
                         intense=false;
                     }
                 }
                 else{
                     medium = false;
-                    iMedium.setText(R.string.medium);
+                    iMedium.setTextColor(Color.WHITE);
                     intensity = 0;
                 }
                 break;
@@ -118,19 +123,19 @@ public class Exercises extends Fragment implements View.OnClickListener {
                 if(!intense){
                     intense = true;
                     intensity = 3;
-                    iIntense.setText(R.string.selected);
+                    iIntense.setTextColor(Color.RED);
                     if(light){
-                        iLight.setText(R.string.light);
+                        iLight.setTextColor(Color.WHITE);
                         light = false;
                     }
                     if(medium){
-                        iMedium.setText(R.string.medium);
+                        iMedium.setTextColor(Color.WHITE);
                         medium=false;
                     }
                 }
                 else{
                     intense = false;
-                    iIntense.setText(R.string.intense);
+                    iIntense.setTextColor(Color.WHITE);
                     intensity = 0;
                 }
                 break;
@@ -150,15 +155,15 @@ public class Exercises extends Fragment implements View.OnClickListener {
                         eDuration.setText(""+duration);
                         switch(intensity){
                             case(1):
-                                iLight.setText(R.string.selected);
+                                iLight.setTextColor(Color.RED);
                                 light=true;
                                 break;
                             case(2):
-                                iMedium.setText(R.string.selected);
+                                iMedium.setTextColor(Color.RED);
                                 medium=true;
                                 break;
                             case(3):
-                                iIntense.setText(R.string.selected);
+                                iIntense.setTextColor(Color.RED);
                                 intense=true;
                                 break;
                         }

@@ -15,11 +15,14 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
         ivy {
             url "https://mbientlab.com/releases/ivyrep"
             layout "gradle"
         }
     }
+
+
 }
 
 task clean(type: Delete) {
