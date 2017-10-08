@@ -53,21 +53,23 @@ public class ShowGraph extends Fragment {
         difference = caloriesBurnt-caloriesGained;
 
         List<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(0f,(float)caloriesGained));
-        barEntries.add(new BarEntry(1f,(float)caloriesBurnt));
-        barEntries.add(new BarEntry(2f,(float)difference));
+        barEntries.add(new BarEntry((float)caloriesGained,0));
+        barEntries.add(new BarEntry((float)caloriesBurnt,1));
+        barEntries.add(new BarEntry((float)difference,2));
         BarDataSet barDataSet = new BarDataSet(barEntries,"Calories Gained, Calories Burnt, Difference");
 
         List<String> info = new ArrayList<>();
-        info.add("Calories Gained");
-        info.add("Calories Burnt");
+        info.add("Gained");
+        info.add("Burnt");
         info.add("Difference");
 
-        BarData theData = new BarData(barDataSet);
-        theData.setBarWidth(0.9f); // set custom bar width
+        BarData theData = new BarData(info,barDataSet);
+        //theData.setBarWidth(1f);
         bars.setData(theData);
-        bars.setFitBars(true); // make the x-axis fit exactly all bars
-        bars.invalidate(); // refresh
+        bars.invalidate();
+        bars.setTouchEnabled(true);
+        bars.setDragEnabled(true);
+        bars.setScaleEnabled(true);
 
 
 
