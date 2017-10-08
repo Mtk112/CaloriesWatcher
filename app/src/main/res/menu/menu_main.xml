@@ -12,5 +12,11 @@
         android:title="@string/action_settings"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/action_move"
+        android:title="@string/action_move"
+        app:showAsAction="never"
+        />
+
 
 </menu>

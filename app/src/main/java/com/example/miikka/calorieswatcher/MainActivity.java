@@ -23,6 +23,7 @@ import Fragments.Exercises;
 import Fragments.FoodIntake;
 import Fragments.Histograph;
 import Fragments.MenuFragment;
+import Fragments.MoveFragment;
 import Fragments.PedometerSettings;
 
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     Exercises exercises = new Exercises();
     Histograph histograph= new Histograph();
     FoodIntake foodIntake = new FoodIntake();
+    MoveFragment moveFragment = new MoveFragment();
     PedometerSettings pedometerSettings = new PedometerSettings();
     FragmentTransaction transaction;
 
@@ -79,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
                 break;
             case(4):
                 transaction=getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,pedometerSettings);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+            case(5):
+                transaction=getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,moveFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
@@ -131,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
                 return true;
             case R.id.action_home:
                 onNewFragmentSelected(0);
+                return true;
+            case R.id.action_move:
+                onNewFragmentSelected(5);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
