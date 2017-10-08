@@ -30,4 +30,8 @@ The data can be reviewd through history feature.
 
 History
 
-By utilizing this feature the user can review lists of his/her exercises and meals.The user can also view these information in a bar chart that calculates and displays calories gained, calories burnt and the difference in sepparate bars. The bar chart utilizes MPAndroidCharts that can be found at: https://github.com/PhilJay/MPAndroidChart
+By utilizing this feature the user can review lists of his/her exercises and meals.The user can also view these information in a bar chart that calculates and displays calories gained, calories burnt and the difference in sepparate bars.
+
+NOTICE!
+
+The bar charts utilize MPAndroidCharts by Phil Jay, and can be found at: https://github.com/PhilJay/MPAndroidChart
