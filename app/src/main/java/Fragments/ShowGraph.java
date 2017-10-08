@@ -62,7 +62,7 @@ public class ShowGraph extends Fragment {
             barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.RED});
         }
         else{
-            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.GREEN}); 
+            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.GREEN});
         }
 
         List<String> info = new ArrayList<>();

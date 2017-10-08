@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import static android.R.id.list;
 public class Histograph extends Fragment implements View.OnClickListener {
     private Button exercises,foods,graph;
     private FragmentTransaction transaction;
+    boolean exeB,foodB,graphB = false;
 
     public Histograph() {
         // Required empty public constructor
@@ -47,16 +49,46 @@ public class Histograph extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case(R.id.histogramExercisesButton):
+                exeB = true;
+                if(foodB) {
+                    foodB= false;
+                    foods.setTextColor(Color.WHITE);
+                }
+                if(graphB){
+                    graphB = false;
+                    graph.setTextColor(Color.WHITE);
+                }
+                exercises.setTextColor(Color.RED);
                 ShowExercises se = new ShowExercises();
                 transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,se);
                 transaction.commit();
                 break;
             case(R.id.histogramFoodButton):
+                foodB = true;
+                if(exeB){
+                    exeB= false;
+                    exercises.setTextColor(Color.WHITE);
+                }
+                if(graphB){
+                    graphB=false;
+                    graph.setTextColor(Color.WHITE);
+                }
+                foods.setTextColor(Color.RED);
                 ShowFood sf = new ShowFood();
                 transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,sf);
                 transaction.commit();
                 break;
             case(R.id.histogramGraphsButton):
+                graphB = true;
+                if(exeB){
+                    exeB=false;
+                    exercises.setTextColor(Color.WHITE);
+                }
+                if(foodB){
+                    foodB=false;
+                    foods.setTextColor(Color.WHITE);
+                }
+                graph.setTextColor(Color.RED);
                 ShowGraph sg = new ShowGraph();
                 transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,sg);
                 transaction.commit();
