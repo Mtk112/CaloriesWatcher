@@ -2,9 +2,7 @@ package Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ import com.example.miikka.calorieswatcher.R;
 import static android.R.id.list;
 
 public class Histograph extends Fragment implements View.OnClickListener {
-    private Button exercises,foods;
+    private Button exercises,foods,graph;
     private FragmentTransaction transaction;
 
     public Histograph() {
@@ -37,6 +35,9 @@ public class Histograph extends Fragment implements View.OnClickListener {
         exercises.setOnClickListener(this);
         foods = (Button)v.findViewById(R.id.histogramFoodButton);
         foods.setOnClickListener(this);
+        graph =(Button)v.findViewById(R.id.histogramGraphsButton);
+        graph.setOnClickListener(this);
+
 
         return v;
     }
@@ -56,6 +57,9 @@ public class Histograph extends Fragment implements View.OnClickListener {
                 transaction.commit();
                 break;
             case(R.id.histogramGraphsButton):
+                ShowGraph sg = new ShowGraph();
+                transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.histogramExtraFragment,sg);
+                transaction.commit();
                 break;
         }
 

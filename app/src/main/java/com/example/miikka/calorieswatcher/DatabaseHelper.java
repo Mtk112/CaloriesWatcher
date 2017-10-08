@@ -187,7 +187,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return myExercises;
     }
-    //(id INTEGER PRIMARY KEY , amount INTEGER, cTime TEXT, fid INTEGER
+    //Returns ArrayList of all the Eaten objects to populate Eaten History List.
     public List<Eaten> getEaten(){
         List eaten = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -197,7 +197,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Eaten someFood = new Eaten();
             someFood.setId(cursor.getInt(0));
             someFood.setAmount(cursor.getInt(1));
-            Log.d("GEtting this",""+cursor.getString(2));
             someFood.setTime(Timestamp.valueOf(cursor.getString(2)));
             someFood.setFid(cursor.getInt(3));
             eaten.add(someFood);
@@ -219,6 +218,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return userSettings;
+    }
+    //Returns the total of Calories Gained by Eating to be used in Graph.
+    public int CaloriesGsined(){
+        int totalGained = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT amount,fid FROM eaten ORDER BY id DESC";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            int eatenAmount = cursor.getInt(0);
+            int fid = cursor.getInt(1);
+            Food food = this.getFoodByFid(fid);
+            int caloriesPer100g = food.getCalories();
+            int gained = eatenAmount*caloriesPer100g/100;
+            totalGained = totalGained + gained;
+        }
+        return totalGained;
+    }
+    //Returns the total of Calories Burnt by doing Exercies to be used in Graph.
+    public int CaloriesBurned(){
+        int totalBurnt = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT caloriesBurnt FROM myExercise ORDER BY id DESC";
+        Cursor cursor = db.rawQuery(query,null);
+        while(cursor.moveToNext()){
+            int burnt = cursor.getInt(0);
+            totalBurnt = totalBurnt + burnt;
+        }
+        return totalBurnt;
     }
 }
 
