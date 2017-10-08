@@ -1,9 +1,9 @@
 # CaloriesWatcher
 
-CaloriesWatcher is an Android application that helps the user keep track of their calories gained and burnt.
+CaloriesWatcher is an Android application that helps the user keep track of their calories gained and burnt. This application is targeted towards anyone who wants to keep track of their weight, especially diabetics.
 The application has a simple algorithm for calculating calories burned while doing exercises and depends on the user to input the exercises, excluding the walking.
 
-The application also is dependant on the user to input the foods they eat, including the amount of calories/100g of the meal.
+The application also is dependant on the user to input the foods they eat, including the amount of calories/100g of the meal!
 
 How to get CaloriesWatcher?
 
@@ -24,11 +24,10 @@ Exercise input
 
 The user can add exercises outside walking to the application. Each exercise must have a name, duration and intensity.
 The application will calculate (somewhat inaccurate) the calories burned by doing the exercise and save the information to the database.
-These entries can be loaded by typing already existing exercise name and pressing the Load/Confirm button. The loaded data ALWAYS picks the first enty that had the name that the user typed.
+These entries can be loaded by typing already existing exercise name and pressing the Load/Confirm button. This ALWAYS loads the first entry that has the same name. After loading the exercise the user can either save it the way it is or alter the information(the loaded enrty won't change!).
 
 The data can be reviewd through history feature.
 
 History
 
-By utilizing this feature the user can review lists of his/her exercises and meals.The user can also view these information in a bar chart
-that calculates and displays calories gained, calories burnt and the difference in sepparate bars.
+By utilizing this feature the user can review lists of his/her exercises and meals.The user can also view these information in a bar chart that calculates and displays calories gained, calories burnt and the difference in sepparate bars. The bar chart utilizes MPAndroidCharts that can be found at: https://github.com/PhilJay/MPAndroidChart
