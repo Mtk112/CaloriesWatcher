@@ -49,28 +49,43 @@ public class ShowGraph extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        caloriesGained = dbHelper.CaloriesGsined();
+        caloriesGained = dbHelper.CaloriesGained();
         caloriesBurnt = dbHelper.CaloriesBurned();
-        difference = caloriesBurnt-caloriesGained;
+        difference = caloriesGained-caloriesBurnt;
 
         List<BarEntry> barEntries = new ArrayList<>();
         barEntries.add(new BarEntry((float)caloriesGained,0));
         barEntries.add(new BarEntry((float)caloriesBurnt,1));
         barEntries.add(new BarEntry((float)difference,2));
+
         BarDataSet barDataSet = new BarDataSet(barEntries,"Calories Gained, Calories Burnt, Difference");
+
+        //Sets the Bar Colors
         if(difference<=0){
-            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.RED});
-        }
-        else{
             barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.GREEN});
         }
+        else{
+            barDataSet.setColors(new int[] {Color.RED, Color.GREEN, Color.RED});
+        }
 
+        //List of X-axis labels
         List<String> info = new ArrayList<>();
         info.add("Gained");
         info.add("Burnt");
         info.add("Difference");
 
+
         BarData theData = new BarData(info,barDataSet);
+        //Customizing the Bar Chart
+        theData.setValueTextColor(Color.WHITE);
+        theData.setValueTextSize(5);
+        bars.getLegend().setTextColor(Color.WHITE);
+        bars.getXAxis().setTextColor(Color.WHITE);
+        bars.getAxisLeft().setTextColor(Color.WHITE);
+        bars.getAxisRight().setTextColor(Color.WHITE);
+        bars.setDescription("Calories gained and burned: since the beginning of time.");
+        bars.setDescriptionColor(Color.WHITE);
+        bars.setBorderColor(Color.WHITE);
         bars.setData(theData);
         bars.invalidate();
         bars.setTouchEnabled(true);
