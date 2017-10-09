@@ -15,6 +15,7 @@ import com.example.miikka.calorieswatcher.R;
 
 import static android.R.id.list;
 
+//Fragment for displaying data for the user, includes list of meals eaten, exercises done and a graph of calories gained/burnt
 public class Histograph extends Fragment implements View.OnClickListener {
     private Button exercises,foods,graph;
     private FragmentTransaction transaction;
@@ -47,7 +48,11 @@ public class Histograph extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    //This onClick checks which button is pressed and executes the relevant code.
+    /*This onClick checks which button is pressed and executes the relevant code.
+    Sets the textColor of seleted button to red, and other buttons back to white
+    and inflates the bottom half fragment.
+     */
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){

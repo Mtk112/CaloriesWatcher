@@ -75,8 +75,10 @@ public class Exercises extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            //the first 3 cases checks which intensity button is pressed and sets the intensity to correct level.
-            // the last case is for retrieving exercise data and/or saving it.
+            /*
+            Sets the text on the button that was pressed to red, sets the intensity
+            and reverts other buttons text color to white.
+            */
             case (R.id.exerciseLightButton):
                 if(!light){
                     light = true;
@@ -139,7 +141,11 @@ public class Exercises extends Fragment implements View.OnClickListener {
                     intensity = 0;
                 }
                 break;
-
+            /*
+            Checks if input fields have been filled, then either loads (if only name is filled) or saves the data to database.
+            If required fields are empty, toast will pop up and ask for the user to fill in the fields. When inserting data
+            is successful toast will pop up that informs the user about the calories burnt by that exercise.
+             */
             case(R.id.exerciseConfirm):
                 exerciseName = eName.getText().toString();
                 exerciseDuration = eDuration.getText().toString();

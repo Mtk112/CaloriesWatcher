@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,16 +40,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
         sql = "CREATE TABLE eaten (id INTEGER PRIMARY KEY , amount INTEGER, cTime TEXT, fid INTEGER, FOREIGN KEY(fid) REFERENCES food(id) );";
         db.execSQL(sql);
-        //Inserts Dummy Data for now.
+        //Inserts Default Data.
         sql = "INSERT INTO settings (weight, sLength) VALUES (\"80.5\",\"100\");";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
         sql = "INSERT INTO exercises (id,exercise) VALUES (1,\"Walking\");";
         db.execSQL(sql);
-        Log.d("Inserting this:", sql);
-
-
-
     }
 
     @Override
@@ -139,7 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return result;
     }
-
+    //Gets the food that is linked to given fid
     public Food getFoodByFid(int fid){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT foodName,calories,id FROM food WHERE id = "+fid+";";
@@ -152,7 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return tempFood;
     }
-
+    //Gets intensity and duration and returns them when loading exercise.(Yes, it always loads the first exercise given eid)
     public List getData(int eid){
         List values = new ArrayList();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -204,11 +198,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return eaten;
     }
-
+    //Gets user settings to be displayed in the settings.
     public UserSettings getUserSettings(){
         UserSettings userSettings= new UserSettings();
-        int weight;
-        int stepLength;
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT weight,sLength from settings";
         Cursor cursor = db.rawQuery(query,null);

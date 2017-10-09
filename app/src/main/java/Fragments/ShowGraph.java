@@ -22,7 +22,9 @@ import java.util.List;
  * Created by Miikka on 10/8/2017.
  */
 
+//Fragment for drawing graph from databases information
 public class ShowGraph extends Fragment {
+    //Variables
     private DatabaseHelper dbHelper;
     BarChart bars;
     int caloriesGained,caloriesBurnt,difference;
@@ -44,11 +46,11 @@ public class ShowGraph extends Fragment {
         return v;
     }
 
+    //Draws BarGraph from Database, only works with overall data :(
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
+        //Gets the overall calories gained and burned and calculates the difference.
         caloriesGained = dbHelper.CaloriesGained();
         caloriesBurnt = dbHelper.CaloriesBurned();
         difference = caloriesGained-caloriesBurnt;
@@ -57,7 +59,7 @@ public class ShowGraph extends Fragment {
         barEntries.add(new BarEntry((float)caloriesGained,0));
         barEntries.add(new BarEntry((float)caloriesBurnt,1));
         barEntries.add(new BarEntry((float)difference,2));
-
+        //Sets the bar data.
         BarDataSet barDataSet = new BarDataSet(barEntries,"Calories Gained, Calories Burnt, Difference");
 
         //Sets the Bar Colors
@@ -95,4 +97,5 @@ public class ShowGraph extends Fragment {
 
 
     }
+
 }

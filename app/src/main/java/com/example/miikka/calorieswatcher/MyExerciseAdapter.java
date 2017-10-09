@@ -35,7 +35,7 @@ public class MyExerciseAdapter extends ArrayAdapter{
             li = LayoutInflater.from(this.getContext());
             targetView = li.inflate(R.layout.exerciseitems,null);
         }
-
+        //Sets the text to correct position in the list.
         MyExercise exe = exers.get(position);
         if (exers != null) {
             TextView tvInfo = (TextView) targetView.findViewById(R.id.info);
@@ -43,7 +43,7 @@ public class MyExerciseAdapter extends ArrayAdapter{
             name = dbHelper.getNameByEid(eid);
             caloriesBurned = exe.getCaloriesBurnt();
             time = exe.getTime().toString();
-            tvInfo.setText(""+name+", Calories used: "+caloriesBurned+"\n "+time);
+            tvInfo.setText(""+name+" \nCalories used: "+caloriesBurned+"\n"+time);
         }
         return targetView;
     }

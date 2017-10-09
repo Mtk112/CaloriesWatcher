@@ -33,7 +33,7 @@ public class EatenAdapter extends ArrayAdapter {
             li = LayoutInflater.from(getContext());
             targetView = li.inflate(R.layout.exerciseitems,null);
         }
-
+        //Sets the text in correct position in the list
         Eaten ate = foods.get(position);
         if (foods != null) {
             TextView tvInfo = (TextView) targetView.findViewById(R.id.info);
@@ -45,7 +45,7 @@ public class EatenAdapter extends ArrayAdapter {
             int calories = amount*caloriesPer100g/100;
             Timestamp time = ate.getTime();
 
-            tvInfo.setText(""+name+", Calories gained: "+calories+"\n"+time);
+            tvInfo.setText(""+name+" \nCalories gained: "+calories+"\n"+time);
 
         }
         return targetView;
