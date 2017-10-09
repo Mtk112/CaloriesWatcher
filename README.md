@@ -36,7 +36,7 @@ UI documentation:
 ADD LINK HERE:
 
 UX:
-ADD LINK HERE:
+https://docs.google.com/a/metropolia.fi/document/d/1h3la_HXmx0XsO-mUwIaEVpQKzu1LhpKuKHtLDr-igQQ/edit?usp=sharing
 
 NOTICE!
 
