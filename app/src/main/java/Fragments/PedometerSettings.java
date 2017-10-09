@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.example.miikka.calorieswatcher.DatabaseHelper;
 import com.example.miikka.calorieswatcher.R;
 import com.example.miikka.calorieswatcher.UserSettings;
-
+/**
+ * Fragment for changing the user settings.
+ */
 public class PedometerSettings extends Fragment implements View.OnClickListener {
     EditText getWeight, getStepLength;
 
@@ -28,7 +30,9 @@ public class PedometerSettings extends Fragment implements View.OnClickListener 
 
 
 
-
+    /**
+     *inflates the layout and sets up the button listener
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,7 +54,9 @@ public class PedometerSettings extends Fragment implements View.OnClickListener 
 
         return v;
     }
-
+    /**
+     *onClick method that reads and parses the data from edit text fields and calls saveSettings method.
+     */
     @Override
     public void onClick(View v){
         try {
@@ -61,7 +67,9 @@ public class PedometerSettings extends Fragment implements View.OnClickListener 
             e.printStackTrace();
         }
     }
-
+    /**
+     * Method that calls the DatabaseHelper class insertSettings method to save the user settings.
+     */
     private void saveSettings(){
         dbHelper.insertSettings(weight,stepLength);
         Toast.makeText(super.getContext(),"Settings saved",Toast.LENGTH_LONG).show();

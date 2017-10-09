@@ -13,12 +13,15 @@ import android.widget.Switch;
 import com.example.miikka.calorieswatcher.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * This fragment is used to start a fragment for external sensor with movement detection
+ * does not work yet
+ *
  */
 public class MoveFragment extends Fragment implements View.OnClickListener{
     FragmentTransaction transaction;
     Button button1,button2;
     MetawearFragment metawearFragment;
+
     public MoveFragment() {
         // Required empty public constructor
     }
@@ -42,13 +45,13 @@ public class MoveFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonMetawearYes:
-                metawearFragment = new MetawearFragment();
+/*                metawearFragment = new MetawearFragment();
                 transaction = getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.moveContainer,metawearFragment);
+                transaction.commit();*/
                 break;
             case R.id.buttonMetawearNo:
                 //do something...maybe
                 break;
         }
-
     }
 }

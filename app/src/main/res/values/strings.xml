@@ -51,5 +51,6 @@
     <string name="on">On</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="meta_timer">How often you need to move?</string>
 
 </resources>
