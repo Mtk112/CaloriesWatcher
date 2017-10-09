@@ -32,10 +32,10 @@ History
 
 By utilizing this feature the user can review lists of his/her exercises and meals.The user can also view these information in a bar chart that calculates and displays calories gained, calories burnt and the difference in sepparate bars.
 
-UI documentation:
-ADD LINK HERE:
+Screenshots:
+https://docs.google.com/a/metropolia.fi/document/d/1gRhRmbmmN_pBFboUuP3Lc1sJtO1LbI83gvqBR0XJjyo/edit?usp=sharing
 
-UX:
+UX documentation:
 https://docs.google.com/a/metropolia.fi/document/d/1h3la_HXmx0XsO-mUwIaEVpQKzu1LhpKuKHtLDr-igQQ/edit?usp=sharing
 
 NOTICE!
