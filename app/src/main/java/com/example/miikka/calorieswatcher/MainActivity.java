@@ -23,9 +23,12 @@ import Fragments.Exercises;
 import Fragments.FoodIntake;
 import Fragments.Histograph;
 import Fragments.MenuFragment;
+import Fragments.MoveFragment;
 import Fragments.PedometerSettings;
 
-
+/**
+ * CaloriesWatched MainActivity, runs when the application is started
+ */
 public class MainActivity extends AppCompatActivity implements MenuFragment.onMenuItemClicked, SensorEventListener, View.OnClickListener{
     MenuFragment menuFragment = new MenuFragment();
     private SensorManager sensorManager;
@@ -34,10 +37,12 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     private Handler handler = new Handler();
     DatabaseHelper dbHelper;
     Timestamp time;
-//    private int weight=80;
-//    private int stepLength=100;
+    boolean activityRunning;
     UserSettings userSettings;
 
+    /**
+     * sensor change listener
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         this.steps=sensorEvent.values[0];
@@ -51,9 +56,14 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
     Exercises exercises = new Exercises();
     Histograph histograph= new Histograph();
     FoodIntake foodIntake = new FoodIntake();
+    MoveFragment moveFragment = new MoveFragment();
     PedometerSettings pedometerSettings = new PedometerSettings();
     FragmentTransaction transaction;
 
+    /**
+     * Loads the selected fragment when called
+     * 0=menuFragment,1=histograph,2=foodIntake,3=exercises,4=pedometerSettings,5=moveFragment
+     */
     @Override
     public void onNewFragmentSelected(int fragment){
         switch(fragment){
@@ -82,9 +92,16 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
+            case(5):
+                transaction=getSupportFragmentManager().beginTransaction().replace(R.id.fragTemplate,moveFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
         }
     }
-
+    /**
+     * Method that is run when application is started, starts the step sensor listener and calls the method that starts default fragment(menu)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,8 +114,19 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         dbHelper= new DatabaseHelper(this);
         userSettings=dbHelper.getUserSettings();
         onNewFragmentSelected(0);
-        handler.postDelayed(runnable,600000);
+        handler.postDelayed(runnable,3600000);
     }
+    /**
+     *
+     */
+    @Override
+    protected void onPause(){
+        super.onPause();
+        activityRunning=false;
+    }
+    /**
+     * Timer method so the application creates exercises from steps taken once an hour
+     */
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -118,11 +146,17 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         }
     };
 
+    /**
+     * Inflates the menu for the actionbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
     }
+    /**
+     * Actionbar click method, listens to clicked items in the actionbar
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
@@ -132,14 +166,20 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
             case R.id.action_home:
                 onNewFragmentSelected(0);
                 return true;
+            case R.id.action_move:
+                onNewFragmentSelected(5);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
+    /**
+     *
+     */
     @Override
     protected void onResume(){
         super.onResume();
+        activityRunning=true;
         Sensor stepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if (stepCounter != null){
             sensorManager.registerListener(this,stepCounter,SensorManager.SENSOR_DELAY_UI);
@@ -148,12 +188,17 @@ public class MainActivity extends AppCompatActivity implements MenuFragment.onMe
         }
 
     }
+    /**
+     * onClick method for the floating action button, shows a toast with the current steps showing
+     */
     @Override
     public void onClick(View view){
 
         Toast.makeText(this,steps+"steps",Toast.LENGTH_SHORT).show();
     }
-
+    /**
+     * Method creates a backstack for the fragments
+     */
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {

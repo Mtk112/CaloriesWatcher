@@ -12,7 +12,6 @@
     <string name="menu_history">HISTORY</string>
 
 
-
     <!-- Placeholder strings For Exercises -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="newExercise">Input new or load existing exercise</string>
@@ -46,5 +45,12 @@
     <string name="histogramExercises">Exercises</string>
     <string name="histogramFoods">Foods</string>
     <string name="histogramGraphs">Graphs</string>
+    <string name="action_move">MOVE</string>
+    <string name="use_metawear">Use Metawear sensor?</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="meta_timer">How often you need to move?</string>
 
 </resources>

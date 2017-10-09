@@ -1,12 +1,8 @@
 package Fragments;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -16,6 +12,9 @@ import android.widget.Button;
 
 import com.example.miikka.calorieswatcher.R;
 
+/**
+ * Fragment with the main menu, basically home screen for the application
+ */
 public class MenuFragment extends Fragment implements View.OnClickListener{
     Button historyButton;
     Button eatButton;
@@ -28,11 +27,15 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     public MenuFragment() {
         // Required empty public constructor
     }
-
+    /**
+     *Interface for changing between fragments.
+     */
     public interface onMenuItemClicked{
         public void onNewFragmentSelected(int selected);
     }
-
+    /**
+     *
+     */
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
@@ -42,7 +45,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
             throw new ClassCastException(activity.toString());
         }
     }
-
+    /**
+     * Buttons to launch different fragments.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +67,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         return v;
     }
+    /**
+     *listeners for buttons in the menu fragment, callback to the interface
+     */
     @Override
     public void onClick(View view){
         switch (view.getId()){
