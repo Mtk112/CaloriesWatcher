@@ -7,7 +7,7 @@ The application also is dependant on the user to input the foods they eat, inclu
 
 How to get CaloriesWatcher?
 
-Clone the github repository (https://github.com/Mtk112/CaloriesWatcher) and run the application while your phone is connected to the computer.
+Clone the github repository (https://github.com/Mtk112/CaloriesWatcher) and run the application using Android Studio, while your phone is connected to the computer.
 
 Features:
 - Food input
