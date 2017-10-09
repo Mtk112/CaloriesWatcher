@@ -220,7 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userSettings;
     }
     //Returns the total of Calories Gained by Eating to be used in Graph.
-    public int CaloriesGsined(){
+    public int CaloriesGained(){
         int totalGained = 0;
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT amount,fid FROM eaten ORDER BY id DESC";
